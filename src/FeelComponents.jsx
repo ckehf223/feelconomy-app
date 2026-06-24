@@ -3,10 +3,34 @@ import "./FeelComponents.css";
 
 // ========== 상수 정의 ==========
 const EMOTIONS = [
-  { emoji: "☀️", label: "햇살", color: "#FFE5B4", message: "오늘은 맑은 하루네요! 이 에너지를 잘 활용해보세요.", particles: ["☀️", "🌤️", "✨", "🌻", "💛"] },
-  { emoji: "☁️", label: "구름", color: "#E8D5C4", message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.", particles: ["☁️", "🌥️", "💨", "🕊️", "🤍"] },
-  { emoji: "🌧️", label: "비", color: "#B8C5D6", message: "비 오는 날엔 잠시 쉬어가도 괜찮아요. 당신의 감정은 소중해요.", particles: ["🌧️", "💧", "🌂", "💙", "🫧"] },
-  { emoji: "⚡", label: "번개", color: "#E8B4D4", message: "감정이 격하게 요동치는 날이네요. 깊은 숨 한번 쉬어볼까요?", particles: ["⚡", "🔥", "💥", "💜", "✨"] },
+  {
+    emoji: "☀️",
+    label: "햇살",
+    color: "#FFE5B4",
+    message: "오늘은 맑은 하루네요! 이 에너지를 잘 활용해보세요.",
+    particles: ["☀️", "🌤️", "✨", "🌻", "💛"],
+  },
+  {
+    emoji: "☁️",
+    label: "구름",
+    color: "#E8D5C4",
+    message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.",
+    particles: ["☁️", "🌥️", "💨", "🕊️", "🤍"],
+  },
+  {
+    emoji: "🌧️",
+    label: "비",
+    color: "#B8C5D6",
+    message: "비 오는 날엔 잠시 쉬어가도 괜찮아요. 당신의 감정은 소중해요.",
+    particles: ["🌧️", "💧", "🌂", "💙", "🫧"],
+  },
+  {
+    emoji: "⚡",
+    label: "번개",
+    color: "#E8B4D4",
+    message: "감정이 격하게 요동치는 날이네요. 깊은 숨 한번 쉬어볼까요?",
+    particles: ["⚡", "🔥", "💥", "💜", "✨"],
+  },
 ];
 
 const PRODUCTS = [
@@ -48,26 +72,66 @@ const TESTIMONIALS = [
   {
     demographic: "20대 대학생",
     topic: "반복 갈등 패턴 이해",
+    topicColor: "#A8D4E6",
+    barColor: "#7BB8D0",
     quote:
       "인간관계에서 계속 반복되는 갈등이 제 패턴이었다는 걸 알게 됐어요. 이제는 상황이 닥쳐도 왜 그런지 이해하고 대처할 수 있어요.",
   },
   {
     demographic: "30대 직장인",
     topic: "스트레스 관리",
+    topicColor: "#C8D4A0",
+    barColor: "#A8C470",
     quote:
       "진로와 업무 스트레스가 쌓일 때마다 쓰러지던 제가, 나만의 회복 루틴을 찾고 훨씬 편해졌어요.",
   },
   {
     demographic: "20대 직장인",
     topic: "연애 반응 패턴 이해",
+    topicColor: "#F0C4C8",
+    barColor: "#E8A0A8",
     quote:
       "어떤 상황에 예민하게 반응하는지 알고 나니, 연애에서 감정 조절이 훨씬 수월해졌어요.",
   },
   {
     demographic: "대학원생",
     topic: "회복 루틴 설계",
+    topicColor: "#A8D4A8",
+    barColor: "#7BB87B",
     quote:
       "내 감정 구조를 이해하고 나니, 무기력할 때 어떻게 채워야 하는지 스스로 알게 됐어요.",
+  },
+  {
+    demographic: "40대 프리랜서",
+    topic: "번아웃 회복",
+    topicColor: "#D4B8E0",
+    barColor: "#B090C8",
+    quote:
+      "일에 치여 감정을 무시하던 습관을 알게 됐어요. 이제는 지치기 전에 쉬는 타이밍을 스스로 찾아요.",
+  },
+  {
+    demographic: "10대 고등학생",
+    topic: "시험 불안 관리",
+    topicColor: "#E0D4A8",
+    barColor: "#C8B878",
+    quote:
+      "시험 때마다 머리가 하얘지던 게 불안 패턴이었어요. 이제는 불안이 와도 대처법을 알아서 덜 무서워요.",
+  },
+  {
+    demographic: "20대 취준생",
+    topic: "자존감 회복",
+    topicColor: "#A8C8E0",
+    barColor: "#78A8C8",
+    quote:
+      "면접에서 떨어질 때마다 나를 탓했는데, 그게 감정 패턴이란 걸 알고 나니 한결 편해졌어요.",
+  },
+  {
+    demographic: "30대 워킹맘",
+    topic: "감정 분리 연습",
+    topicColor: "#F0D4B8",
+    barColor: "#D8B090",
+    quote:
+      "아이에게 화를 내고 후회하는 반복이 줄었어요. 내 감정과 아이의 감정을 분리해서 볼 수 있게 됐어요.",
   },
 ];
 
@@ -104,7 +168,11 @@ function Navigation() {
   return (
     <header className="header">
       <div className="navbar">
-        <img src="/assets/fillmore-studio-logo.png" alt="필모어 스튜디오" className="logo-image" />
+        <img
+          src="/assets/fillmore-studio-logo.png"
+          alt="필모어 스튜디오"
+          className="logo-image"
+        />
         <nav className="nav">
           <a href="#emotion" className="nav-link">
             기분 체크
@@ -118,11 +186,13 @@ function Navigation() {
           <a href="#beta" className="nav-link">
             체험단
           </a>
-          <a href="#apply" className="nav-link">
+          {/* <a href="#apply" className="nav-link">
             신청
-          </a>
+          </a> */}
         </nav>
-        <a href="#apply" className="cta">무료 체험단 신청 →</a>
+        <a href="#apply" className="cta">
+          무료 체험단 신청 →
+        </a>
       </div>
     </header>
   );
@@ -178,7 +248,12 @@ function WeatherOverlay({ type, animKey }) {
   const [raindrops] = useState(() => generateRaindrops());
 
   if (type === "햇살") {
-    return <div key={animKey} className="weather-overlay weather-sun"><div className="sun-glow" /><div className="sun-rays" /></div>;
+    return (
+      <div key={animKey} className="weather-overlay weather-sun">
+        <div className="sun-glow" />
+        <div className="sun-rays" />
+      </div>
+    );
   }
   if (type === "구름") {
     return (
@@ -186,6 +261,11 @@ function WeatherOverlay({ type, animKey }) {
         <div className="cloud-fog cloud-fog--1" />
         <div className="cloud-fog cloud-fog--2" />
         <div className="cloud-fog cloud-fog--3" />
+        <div className="cloud-shape cloud-shape--1">☁️</div>
+        <div className="cloud-shape cloud-shape--2">☁️</div>
+        <div className="cloud-shape cloud-shape--3">🌥️</div>
+        <div className="cloud-shape cloud-shape--4">☁️</div>
+        <div className="cloud-shape cloud-shape--5">🌥️</div>
       </div>
     );
   }
@@ -193,13 +273,27 @@ function WeatherOverlay({ type, animKey }) {
     return (
       <div key={animKey} className="weather-overlay weather-rain">
         {raindrops.map((d) => (
-          <div key={d.id} className="raindrop" style={{ left: `${d.left}%`, animationDelay: `${d.delay}s`, animationDuration: `${d.duration}s`, opacity: d.opacity }} />
+          <div
+            key={d.id}
+            className="raindrop"
+            style={{
+              left: `${d.left}%`,
+              animationDelay: `${d.delay}s`,
+              animationDuration: `${d.duration}s`,
+              opacity: d.opacity,
+            }}
+          />
         ))}
       </div>
     );
   }
   if (type === "번개") {
-    return <div key={animKey} className="weather-overlay weather-lightning"><div className="lightning-flash" /><div className="lightning-bolt">⚡</div></div>;
+    return (
+      <div key={animKey} className="weather-overlay weather-lightning">
+        <div className="lightning-flash" />
+        <div className="lightning-bolt">⚡</div>
+      </div>
+    );
   }
   return null;
 }
@@ -222,12 +316,17 @@ function EmotionCheck() {
     >
       {selected && <WeatherOverlay type={selected} animKey={animKey} />}
 
-      <div className="section-content" style={{ position: "relative", zIndex: 2 }}>
+      <div
+        className="section-content"
+        style={{ position: "relative", zIndex: 2 }}
+      >
         <span className="step-label">Step 01 · Emotion Check</span>
         <h2 className="section-title">
-          오늘 기분, <span className="italic">날씨</span>로 표현하면
+          <span className="font-serif">오늘 기분, </span>
+          <span className="font-serif bold-text-orange">날씨</span>
+          <span className="font-serif">로 표현하면</span>
           <br />
-          어떤 날씨인가요?
+          <span className="font-serif">어떤 날씨인가요?</span>
         </h2>
         <p className="section-desc">
           지금 내 감정 상태를 <strong>10초 안에</strong> 확인해보세요.
@@ -247,7 +346,9 @@ function EmotionCheck() {
           ))}
         </div>
 
-        <div className={`emotion-result ${selected ? "emotion-result--visible" : ""}`}>
+        <div
+          className={`emotion-result ${selected ? "emotion-result--visible" : ""}`}
+        >
           {currentEmotion && (
             <>
               <div className="result-emoji">{currentEmotion.emoji}</div>
@@ -255,18 +356,40 @@ function EmotionCheck() {
             </>
           )}
         </div>
-
-        <div className="scroll-indicator">scroll ↓</div>
       </div>
     </section>
   );
 }
 
 const ABOUT_CARDS = [
-  { label: "SEONGSU, 2026", title: "성수 팝업", color: "#F5B8C4" },
-  { label: "BRANDING STUDIO", title: "브랜딩 컨설팅", color: "#D6D48C" },
-  { label: "EMOTION DATA", title: "감정 데이터", color: "#8CBEE0" },
-  { label: "LONG-TERM GOAL", title: "Wee클래스 보급", color: "#E8A88C" },
+  {
+    label: "SEONGSU, 2026",
+    title: "성수 팝업",
+    desc: "감정을 직접 만지고 경험하는 오프라인 공간",
+    icon: "🏠",
+    color: "#F5B8C4",
+  },
+  {
+    label: "BRANDING STUDIO",
+    title: "브랜딩 컨설팅",
+    desc: "브랜드의 빈 부분을 채우는 전략 설계",
+    icon: "✦",
+    color: "#D6D48C",
+  },
+  {
+    label: "EMOTION DATA",
+    title: "감정 데이터",
+    desc: "실제 참여자 기반의 감정 패턴 분석",
+    icon: "📊",
+    color: "#8CBEE0",
+  },
+  {
+    label: "LONG-TERM GOAL",
+    title: "Wee클래스 보급",
+    desc: "학교 현장으로 확장하는 정서지원 모델",
+    icon: "🎓",
+    color: "#E8A88C",
+  },
 ];
 
 function AboutStudio() {
@@ -277,25 +400,35 @@ function AboutStudio() {
           <div className="about-left">
             <span className="step-label">About · Fillmore Studio</span>
             <h2 className="about-title">
-              안녕하세요,
+              <span className="non-italic-bold">안녕하세요,</span>
               <br />
-              <span className="italic-bold">필모어 스튜디오</span>입니다.
+              <span className="non-italic-bold">필모어 스튜디오 입니다.</span>
             </h2>
             <p className="about-desc">
               저희는 브랜드와 사람의 '빈 부분'을 채우는 브랜딩 컨설팅 회사예요.
               감각을 넘어 본질을 채우는 일, 그게 저희가 하는 일입니다.
             </p>
             <p className="about-desc">
-              얼마 전에는 <strong>성수에서 'Fillconomy' 팝업</strong>을 열어 많은
-              분들과 직접 만나기도 했어요.
+              얼마 전에는 <strong>성수에서 'Fillconomy' 팝업</strong>을 열어
+              많은 분들과 직접 만나기도 했어요.
             </p>
           </div>
           <div className="about-right">
             <div className="about-cards">
               {ABOUT_CARDS.map((card, idx) => (
-                <div key={idx} className="about-card" style={{ backgroundColor: card.color }}>
-                  <span className="about-card-label">{card.label}</span>
-                  <span className="about-card-title">{card.title}</span>
+                <div
+                  key={idx}
+                  className="about-card"
+                  style={{ backgroundColor: card.color }}
+                >
+                  <div className="about-card-top">
+                    <span className="about-card-label">{card.label}</span>
+                    <span className="about-card-icon">{card.icon}</span>
+                  </div>
+                  <div className="about-card-bottom">
+                    <span className="about-card-title">{card.title}</span>
+                    <span className="about-card-desc">{card.desc}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -311,8 +444,8 @@ function Feelconomy() {
     <section id="feelconomy" className="section section--warm">
       <div className="section-content">
         <span className="step-label">Step 02 · What is Feelconomy?</span>
-        <h2 className="section-title">
-          우리는 <span className="italic">기분</span>을 위해
+        <h2 className="section-title font-serif">
+          우리는 기분을 위해
           <br />
           소비합니다.
         </h2>
@@ -320,29 +453,31 @@ function Feelconomy() {
         <div className="product-grid">
           {PRODUCTS.map((product) => (
             <div key={product.name} className="product-card">
-              {product.image && (
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                />
-              )}
+              <img
+                src={product.image}
+                alt={product.name}
+                className="product-image"
+              />
               <div className="product-name">{product.name}</div>
             </div>
           ))}
         </div>
 
         <div className="feelconomy-explain">
-          <p className="explain-text">이 모든 건 결국,</p>
+          <p className="explain-text font-serif">이 모든 건 결국,</p>
           <h3 className="formula">
-            Feel + Economy = <strong>Feelconomy</strong>
+            <span className="text-brand-accent italic">Feel</span>
+            <span> + </span>
+            <span className="text-brand-red italic">Economy</span>
+            <span> = </span>
+            <strong>Feelconomy</strong>
           </h3>
           <p className="explain-subtext">"기분을 채우기 위한 소비"</p>
           <blockquote className="quote">
-            "하지만 대부분은 <span className="italic-bold">즉각적 진통제</span>
+            하지만 대부분은 <span className="italic-bold">즉각적 진통제</span>
             일 뿐,
             <br />
-            근본적인 회복은 아니에요."
+            근본적인 회복은 아니에요.
           </blockquote>
         </div>
       </div>
@@ -350,45 +485,94 @@ function Feelconomy() {
   );
 }
 
+const LOOP_ITEMS = [
+  {
+    label: "불안",
+    icon: "😰",
+    color: "#E8A88C",
+    detail: "무언가 잘못될 것 같은 막연한 두려움이 반복됩니다.",
+  },
+  {
+    label: "회피",
+    icon: "🙈",
+    color: "#D6D48C",
+    detail: "불편한 감정을 마주하지 않고 자꾸 뒤로 미루게 됩니다.",
+  },
+  {
+    label: "후회",
+    icon: "😔",
+    color: "#8CBEE0",
+    detail: "왜 그때 그렇게 했을까, 같은 생각이 머릿속을 맴돕니다.",
+  },
+  {
+    label: "스트레스",
+    icon: "🤯",
+    color: "#F5B8C4",
+    detail: "쌓이고 쌓여 결국 몸과 마음이 함께 무너지는 순간이 옵니다.",
+  },
+];
+
 function Problem() {
+  const [selectedLoop, setSelectedLoop] = useState(null);
+
   return (
     <section className="section">
       <div className="section-content">
         <span className="step-label">Step 03 · The Problem</span>
-        <h2 className="section-title">
+        <h2 className="section-title font-serif">
           왜 우리는 자꾸
           <br />
-          <span className="italic">같은 감정</span>에 반복적으로
+          <span className="">같은 감정</span>에 반복적으로
           <br />
           흔들릴까요?
         </h2>
 
         <div className="emotion-loop">
-          <div className="loop-item">01 불안</div>
-          <div className="loop-item">02 회피</div>
-          <div className="loop-item">03 후회</div>
-          <div className="loop-item">04 스트레스</div>
-          <div className="loop-arrow">↺ 반복되는 감정 루프</div>
+          {LOOP_ITEMS.map((item, idx) => (
+            <button
+              key={idx}
+              className={`loop-item ${selectedLoop === idx ? "loop-item--active" : ""} ${selectedLoop !== null && selectedLoop !== idx ? "loop-item--dimmed" : ""}`}
+              style={
+                selectedLoop === idx
+                  ? { backgroundColor: item.color }
+                  : undefined
+              }
+              onClick={() => setSelectedLoop(selectedLoop === idx ? null : idx)}
+            >
+              <span className="loop-icon">{item.icon}</span>
+              <span className="loop-label">{item.label}</span>
+            </button>
+          ))}
+          <div className="loop-connector">
+            <span className="loop-connector-icon">↺</span>
+            <span>반복되는 감정 루프</span>
+          </div>
         </div>
 
         <div className="problem-list">
           {[
             {
+              num: "01",
               title: "스트레스 패턴을 모르기 때문에",
               desc: "내가 어떤 상황에서 무너지는지 모르면 같은 자리에서 같은 방식으로 반복합니다.",
             },
             {
+              num: "02",
               title: "회복 방식을 모르기 때문에",
               desc: "잠시 잊는 것과 회복하는 것은 다릅니다. 나에게 맞는 회복 루틴이 필요합니다.",
             },
             {
+              num: "03",
               title: "감정의 원인을 모르기 때문에",
               desc: "표면 감정이 아니라 그 밑에 깔린 진짜 신호를 짚어야 흐름이 끊깁니다.",
             },
           ].map((item, idx) => (
             <div key={idx} className="problem-item">
-              <h4 className="problem-title">{item.title}</h4>
-              <p className="problem-desc">{item.desc}</p>
+              <span className="problem-num">{item.num}</span>
+              <div className="problem-body">
+                <h4 className="problem-title">{item.title}</h4>
+                <p className="problem-desc">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -402,10 +586,10 @@ function Solution() {
     <section id="solution" className="section section--warm">
       <div className="section-content">
         <span className="step-label">Step 04 · Our Solution</span>
-        <h2 className="section-title">
+        <h2 className="section-title font-serif">
           일시적인 진통제가 아닌,
           <br />
-          <span className="italic">감정 코칭 프로그램</span>
+          <span className="">감정 코칭 프로그램</span>
         </h2>
 
         <p className="solution-desc">
@@ -426,7 +610,7 @@ function Solution() {
 
         <div className="discovery-section">
           <h3 className="discovery-title">
-            이 프로그램을 통해 <span className="italic">발견</span>하게 됩니다
+            이 프로그램을 통해 <span className="">발견</span>하게 됩니다
           </h3>
           <div className="discovery-list">
             {DISCOVERIES.map((item, idx) => (
@@ -449,16 +633,25 @@ function RealStories() {
     <section className="section">
       <div className="section-content">
         <span className="step-label">Step 07 · Real Stories</span>
-        <h2 className="section-title">
-          실제 참여자들의 <span className="italic">이야기</span>
+        <h2 className="section-title font-serif">
+          실제 참여자들의 <span className="">이야기</span>
         </h2>
 
         <div className="stories-grid">
           {TESTIMONIALS.map((story, idx) => (
             <div key={idx} className="story-card">
+              <div
+                className="story-bar"
+                style={{ backgroundColor: story.barColor }}
+              />
               <div className="story-header">
                 <span className="story-demographic">{story.demographic}</span>
-                <span className="story-topic">{story.topic}</span>
+                <span
+                  className="story-topic"
+                  style={{ backgroundColor: story.topicColor }}
+                >
+                  {story.topic}
+                </span>
               </div>
               <p className="story-quote">"{story.quote}"</p>
             </div>
@@ -469,42 +662,41 @@ function RealStories() {
   );
 }
 
+const BETA_STEPS = [
+  "감정 패턴 분석",
+  "관계 패턴 분석",
+  "회복 전략 설계",
+  "삶의 방향성 점검",
+];
+
 function BetaProgram() {
   return (
     <section id="beta" className="section">
       <div className="section-content">
         <span className="step-label">Step 05 · Beta Program</span>
-        <h2 className="section-title">
-          현재 <span className="italic">베타 체험단</span> 모집 중
+        <h2 className="section-title font-serif">
+          현재 <span className="">베타 체험단</span> 모집 중
         </h2>
         <p className="section-desc">
           <strong>30만 원 상당</strong> 프로그램을 사전 체험단에게{" "}
           <strong>무료</strong>로 제공합니다.
-        </p>
-        <p className="section-subdesc">
-          전문 코치와 함께, 감정 패턴부터 삶의 방향성까지 정리합니다.
-          <br />
-          연령대·직업군을 고려하여 선정하며, 진정한 변화를 원하는 분을 찾습니다.
+          <br /> 연령대·직업군을 고려해 진짜 변화를 원하시는 분 중심으로
+          선정해요.
         </p>
 
         <div className="beta-steps">
-          {[
-            "감정 패턴 분석",
-            "관계 패턴 분석",
-            "회복 전략 설계",
-            "삶의 방향성 점검",
-          ].map((step, idx) => (
+          {BETA_STEPS.map((step, idx) => (
             <div key={idx} className="beta-step">
-              <div className="step-number">
+              <span className="beta-step-num">
                 {String(idx + 1).padStart(2, "0")}
-              </div>
-              <div>{step}</div>
+              </span>
+              <span className="beta-step-title">{step}</span>
             </div>
           ))}
         </div>
 
         <div className="before-after">
-          <div className="before-after-card">
+          <div className="before-after-card before-card">
             <h4 className="before-title">Before</h4>
             <p className="before-text">
               "왜 힘든지
@@ -512,11 +704,11 @@ function BetaProgram() {
               모르겠음."
             </p>
           </div>
-          <div className="arrow">→</div>
-          <div className="before-after-card">
+          <div className="before-after-card after-card">
             <h4 className="after-title">After</h4>
             <p className="after-text">
-              "내가 왜<br />
+              "내가 왜
+              <br />
               반복되는지
               <br />
               알게 됨."
@@ -533,8 +725,8 @@ function Benefits() {
     <section className="section section--warm">
       <div className="section-content">
         <span className="step-label">Step 06 · What You Get</span>
-        <h2 className="section-title">
-          참여하면 <span className="italic">이런 걸</span> 얻어요
+        <h2 className="section-title font-serif">
+          참여하면 <span className="">이런 걸</span> 얻어요
         </h2>
 
         <div className="benefits-grid">
@@ -555,8 +747,8 @@ function WhyTrust() {
     <section className="section">
       <div className="section-content">
         <span className="step-label">Step 08 · Why Trust Us</span>
-        <h2 className="section-title">
-          우리는 단순 <span className="italic">상담 서비스</span>가 아닙니다.
+        <h2 className="section-title font-serif">
+          우리는 단순 <span className="">상담 서비스</span>가 아닙니다.
         </h2>
 
         <div className="trust-grid">
@@ -604,11 +796,11 @@ function ApplyForm() {
     <section id="apply" className="section section--cool">
       <div className="section-content">
         <span className="step-label">Step 09 · Apply</span>
-        <h2 className="section-title">
-          무료 체험단 <span className="italic">신청하기</span>
+        <h2 className="section-title font-serif">
+          무료 체험단 <span className="">신청하기</span>
         </h2>
 
-        <form onSubmit={handleSubmit} className="form">
+        <div className="form">
           <div className="form-group">
             <label className="form-label">이름</label>
             <input
@@ -689,7 +881,7 @@ function ApplyForm() {
           <button type="submit" className="submit-button">
             나의 감정 패턴 분석 신청하기 →
           </button>
-        </form>
+        </div>
       </div>
     </section>
   );

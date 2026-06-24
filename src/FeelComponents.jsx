@@ -10,20 +10,65 @@ const EMOTIONS = [
 ];
 
 const PRODUCTS = [
-  { name: "왁뿌볼", image: "/src/assets/wakppubol.jpg" },
-  { name: "슬라임", image: "/src/assets/slime.jpg" },
-  { name: "AI 상담", image: "/src/assets/ai-counseling.jpg" },
-  { name: "키캡", image: "/src/assets/keycaps.jpg" },
-  { name: "향초", image: "/src/assets/candle.jpg" },
-  { name: "디퓨저", image: "/src/assets/diffuser.jpg" },
-  { name: "힐링 콘텐츠", image: "/src/assets/healing-content.jpg" },
-  { name: "ASMR", image: "/src/assets/asmr.jpg" },
+  { name: "왁뿌볼", image: "/assets/wakppubol.jpg" },
+  { name: "슬라임", image: "/assets/slime.jpg" },
+  { name: "AI 상담", image: "/assets/ai-counseling.jpg" },
+  { name: "키캡", image: "/assets/keycaps.jpg" },
+  { name: "향초", image: "/assets/candle.jpg" },
+  { name: "디퓨저", image: "/assets/diffuser.jpg" },
+  { name: "힐링 콘텐츠", image: "/assets/healing-content.jpg" },
+  { name: "ASMR", image: "/assets/asmr.jpg" },
 ];
 
-const EDITIONS = [
-  { name: "Mind", color1: "#F5F1ED", color2: "#E8D5C4", label: "Ivory" },
-  { name: "Balance", color1: "#FFE5E8", color2: "#F5C4D4", label: "Petal" },
-  { name: "Breeze", color1: "#E8F5F5", color2: "#C4E5E8", label: "Breeze" },
+const PHASES = [
+  {
+    phase: "Phase 01",
+    title: "데이터 수집",
+    desc: "전문 코치와 함께 다양한 감정·관계·진로 사례를 수집합니다.",
+  },
+  {
+    phase: "Phase 02",
+    title: "프로그램 검증·고도화",
+    desc: "실제 코칭 세션에서 효과를 검증하고 프로그램을 정교화합니다.",
+  },
+  {
+    phase: "Phase 03",
+    title: "Wee클래스 보급",
+    desc: "중·고등학교 상담 현장으로 감정 케어 프로그램을 확대합니다.",
+  },
+];
+
+const DISCOVERIES = [
+  "나는 언제 스트레스를 가장 많이 받는 사람인지",
+  "어떤 환경에서 가장 좋은 컨디션을 유지하는지",
+  "나는 어떤 방식으로 회복하는 사람인지",
+];
+
+const TESTIMONIALS = [
+  {
+    demographic: "20대 대학생",
+    topic: "반복 갈등 패턴 이해",
+    quote:
+      "인간관계에서 계속 반복되는 갈등이 제 패턴이었다는 걸 알게 됐어요. 이제는 상황이 닥쳐도 왜 그런지 이해하고 대처할 수 있어요.",
+  },
+  {
+    demographic: "30대 직장인",
+    topic: "스트레스 관리",
+    quote:
+      "진로와 업무 스트레스가 쌓일 때마다 쓰러지던 제가, 나만의 회복 루틴을 찾고 훨씬 편해졌어요.",
+  },
+  {
+    demographic: "20대 직장인",
+    topic: "연애 반응 패턴 이해",
+    quote:
+      "어떤 상황에 예민하게 반응하는지 알고 나니, 연애에서 감정 조절이 훨씬 수월해졌어요.",
+  },
+  {
+    demographic: "대학원생",
+    topic: "회복 루틴 설계",
+    quote:
+      "내 감정 구조를 이해하고 나니, 무기력할 때 어떻게 채워야 하는지 스스로 알게 됐어요.",
+  },
 ];
 
 const BENEFITS = [
@@ -250,77 +295,66 @@ function Solution() {
       <div className="section-content">
         <span className="step-label">Step 04 · Our Solution</span>
         <h2 className="section-title">
-          <span className="italic">Feelconomy</span>
+          일시적인 진통제가 아닌,
           <br />
-          Emotional Care Device
+          <span className="italic">감정 코칭 프로그램</span>
         </h2>
 
         <p className="solution-desc">
-          내 감정을 이해하고 관리하는 나만의 감정 케어 디바이스.
+          스트레스와 불안을 스스로 이해하고 관리할 수 있도록,
+          <br />
+          전문 코치와 함께하는 구조화된 프로그램입니다.
         </p>
 
-        <div className="device-highlight">
-          <div className="device-badge">Hardware × App</div>
+        <div className="phases-grid">
+          {PHASES.map((phase, idx) => (
+            <div key={idx} className="phase-card">
+              <span className="phase-label">{phase.phase}</span>
+              <h4 className="phase-title">{phase.title}</h4>
+              <p className="phase-desc">{phase.desc}</p>
+            </div>
+          ))}
         </div>
 
-        <div className="feature-section">
-          <h3 className="feature-title">
-            손 안에서 시작되는 <span className="italic">감정 케어 루틴</span>
+        <div className="discovery-section">
+          <h3 className="discovery-title">
+            이 프로그램을 통해 <span className="italic">발견</span>하게 됩니다
           </h3>
-          <p className="feature-desc">
-            터치 한 번으로 지금의 감정을 확인하고, 상태에 맞춘 진동 케어로
-            마음을 안정시켜요. 연동된 앱이 매일의 감정 패턴을 기록하고 분석해
-            나에게 꼭 맞는 회복 루틴을 제안합니다.
-          </p>
-          <div className="device-components">
-            <span>디바이스</span> · <span>스트랩</span> ·{" "}
-            <span>충전 케이블</span> · <span>전용 App</span>
-          </div>
-        </div>
-
-        <div className="features-grid">
-          <h3 className="feature-title">5가지 핵심 기능</h3>
-          <div className="features-list">
-            {[
-              {
-                title: "감정 체크",
-                desc: "터치 한 번으로 지금 내 감정을 확인",
-              },
-              {
-                title: "감정 비주얼",
-                desc: "6가지 감정을 캐릭터와 색으로 표현",
-              },
-              {
-                title: "진동 케어",
-                desc: "감정 상태에 맞춘 바이오 피드백 진동",
-              },
-              { title: "기록 & 분석", desc: "앱으로 감정 기록과 패턴 분석" },
-              { title: "맞춤 케어", desc: "나에게 맞는 케어 루틴 제안" },
-            ].map((feature, idx) => (
-              <div key={idx} className="feature-item">
-                <h4 className="feature-item-title">{feature.title}</h4>
-                <p className="feature-item-desc">{feature.desc}</p>
+          <div className="discovery-list">
+            {DISCOVERIES.map((item, idx) => (
+              <div key={idx} className="discovery-item">
+                <span className="discovery-number">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <p className="discovery-text">{item}</p>
               </div>
             ))}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="editions-section">
-          <h3 className="edition-title">3 Editions</h3>
-          <div className="editions-grid">
-            {EDITIONS.map((edition) => (
-              <div key={edition.name} className="edition-card">
-                <div
-                  className="edition-color"
-                  style={{ backgroundColor: edition.color1 }}
-                ></div>
-                <div className="edition-info">
-                  <strong>{edition.name}</strong>
-                  <span>{edition.label}</span>
-                </div>
+function RealStories() {
+  return (
+    <section className="section">
+      <div className="section-content">
+        <span className="step-label">Step 07 · Real Stories</span>
+        <h2 className="section-title">
+          실제 참여자들의 <span className="italic">이야기</span>
+        </h2>
+
+        <div className="stories-grid">
+          {TESTIMONIALS.map((story, idx) => (
+            <div key={idx} className="story-card">
+              <div className="story-header">
+                <span className="story-demographic">{story.demographic}</span>
+                <span className="story-topic">{story.topic}</span>
               </div>
-            ))}
-          </div>
+              <p className="story-quote">"{story.quote}"</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -336,7 +370,13 @@ function BetaProgram() {
           현재 <span className="italic">베타 체험단</span> 모집 중
         </h2>
         <p className="section-desc">
+          <strong>30만 원 상당</strong> 프로그램을 사전 체험단에게{" "}
+          <strong>무료</strong>로 제공합니다.
+        </p>
+        <p className="section-subdesc">
           전문 코치와 함께, 감정 패턴부터 삶의 방향성까지 정리합니다.
+          <br />
+          연령대·직업군을 고려하여 선정하며, 진정한 변화를 원하는 분을 찾습니다.
         </p>
 
         <div className="beta-steps">
@@ -406,7 +446,7 @@ function WhyTrust() {
   return (
     <section className="section">
       <div className="section-content">
-        <span className="step-label">Step 07 · Why Trust Us</span>
+        <span className="step-label">Step 08 · Why Trust Us</span>
         <h2 className="section-title">
           우리는 단순 <span className="italic">상담 서비스</span>가 아닙니다.
         </h2>
@@ -455,7 +495,7 @@ function ApplyForm() {
   return (
     <section id="apply" className="section section--cool">
       <div className="section-content">
-        <span className="step-label">Step 08 · Apply</span>
+        <span className="step-label">Step 09 · Apply</span>
         <h2 className="section-title">
           무료 체험단 <span className="italic">신청하기</span>
         </h2>
@@ -584,6 +624,7 @@ export default function FeelComponents() {
       <Solution />
       <BetaProgram />
       <Benefits />
+      <RealStories />
       <WhyTrust />
       <ApplyForm />
       <Footer />

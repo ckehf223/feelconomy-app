@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import "./FeelComponents.css";
 
 // ========== 상수 정의 ==========
 const EMOTIONS = [
-  { emoji: "☀️", label: "햇살", color: "#FFE5B4" },
-  { emoji: "☁️", label: "구름", color: "#E8D5C4" },
-  { emoji: "🌧️", label: "비", color: "#B8C5D6" },
-  { emoji: "⚡", label: "번개", color: "#E8B4D4" },
+  { emoji: "☀️", label: "햇살", color: "#FFE5B4", message: "오늘은 맑은 하루네요! 이 에너지를 잘 활용해보세요.", particles: ["☀️", "🌤️", "✨", "🌻", "💛"] },
+  { emoji: "☁️", label: "구름", color: "#E8D5C4", message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.", particles: ["☁️", "🌥️", "💨", "🕊️", "🤍"] },
+  { emoji: "🌧️", label: "비", color: "#B8C5D6", message: "비 오는 날엔 잠시 쉬어가도 괜찮아요. 당신의 감정은 소중해요.", particles: ["🌧️", "💧", "🌂", "💙", "🫧"] },
+  { emoji: "⚡", label: "번개", color: "#E8B4D4", message: "감정이 격하게 요동치는 날이네요. 깊은 숨 한번 쉬어볼까요?", particles: ["⚡", "🔥", "💥", "💜", "✨"] },
 ];
 
 const PRODUCTS = [
@@ -104,7 +104,7 @@ function Navigation() {
   return (
     <header className="header">
       <div className="navbar">
-        <div className="logo">필모어 스튜디오</div>
+        <img src="/assets/fillmore-studio-logo.png" alt="필모어 스튜디오" className="logo-image" />
         <nav className="nav">
           <a href="#emotion" className="nav-link">
             기분 체크
@@ -122,7 +122,7 @@ function Navigation() {
             신청
           </a>
         </nav>
-        <button className="cta">무료 체험단 신청 →</button>
+        <a href="#apply" className="cta">무료 체험단 신청 →</a>
       </div>
     </header>
   );
@@ -131,32 +131,98 @@ function Navigation() {
 function Hero() {
   return (
     <section className="hero">
-      <div className="hero-content">
-        <h1 className="hero-title">What's Missing?</h1>
-        <p className="hero-subtitle">
-          We help you understand yourself and fill what matters.
-        </p>
-        <p className="hero-ko">
-          필모어 스튜디오는
-          <br />
-          당신의 빈 부분을 채워,
-          <br />
-          더 나다운 삶으로 가는 여정을
-          <br />
-          함께합니다.
-        </p>
-        <p className="hero-motto">Every emotion matters.</p>
+      <div className="hero-layout">
+        <div className="hero-left">
+          <h1 className="hero-title">
+            What's
+            <br />
+            <span className="hero-title-italic">Missing?</span>
+          </h1>
+          <p className="hero-motto">Every emotion matters.</p>
+        </div>
+        <div className="hero-right">
+          <p className="hero-subtitle">
+            We help you
+            <br />
+            understand yourself
+            <br />
+            and fill what matters.
+          </p>
+          <div className="hero-divider" />
+          <p className="hero-ko">
+            필모어 스튜디오는
+            <br />
+            당신의 빈 부분을 채워,
+            <br />
+            더 나다운 삶으로 가는 여정을
+            <br />
+            함께합니다.
+          </p>
+        </div>
       </div>
     </section>
   );
 }
 
+function generateRaindrops() {
+  return Array.from({ length: 40 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 1.5,
+    duration: 0.6 + Math.random() * 0.6,
+    opacity: 0.3 + Math.random() * 0.5,
+  }));
+}
+
+function WeatherOverlay({ type, animKey }) {
+  const [raindrops] = useState(() => generateRaindrops());
+
+  if (type === "햇살") {
+    return <div key={animKey} className="weather-overlay weather-sun"><div className="sun-glow" /><div className="sun-rays" /></div>;
+  }
+  if (type === "구름") {
+    return (
+      <div key={animKey} className="weather-overlay weather-cloud">
+        <div className="cloud-fog cloud-fog--1" />
+        <div className="cloud-fog cloud-fog--2" />
+        <div className="cloud-fog cloud-fog--3" />
+      </div>
+    );
+  }
+  if (type === "비") {
+    return (
+      <div key={animKey} className="weather-overlay weather-rain">
+        {raindrops.map((d) => (
+          <div key={d.id} className="raindrop" style={{ left: `${d.left}%`, animationDelay: `${d.delay}s`, animationDuration: `${d.duration}s`, opacity: d.opacity }} />
+        ))}
+      </div>
+    );
+  }
+  if (type === "번개") {
+    return <div key={animKey} className="weather-overlay weather-lightning"><div className="lightning-flash" /><div className="lightning-bolt">⚡</div></div>;
+  }
+  return null;
+}
+
 function EmotionCheck() {
   const [selected, setSelected] = useState(null);
+  const [animKey, setAnimKey] = useState(0);
+
+  const handleSelect = useCallback((emotion) => {
+    setSelected(emotion.label);
+    setAnimKey((k) => k + 1);
+  }, []);
+
+  const currentEmotion = EMOTIONS.find((e) => e.label === selected);
 
   return (
-    <section id="emotion" className="section">
-      <div className="section-content">
+    <section
+      id="emotion"
+      className={`section emotion-section ${selected ? `emotion-section--${selected}` : ""}`}
+    >
+      {selected && <WeatherOverlay type={selected} animKey={animKey} />}
+
+      <div className="section-content" style={{ position: "relative", zIndex: 2 }}>
         <span className="step-label">Step 01 · Emotion Check</span>
         <h2 className="section-title">
           오늘 기분, <span className="italic">날씨</span>로 표현하면
@@ -171,14 +237,9 @@ function EmotionCheck() {
           {EMOTIONS.map((emotion) => (
             <button
               key={emotion.label}
-              onClick={() => setSelected(emotion.label)}
-              className="emotion-button"
-              style={{
-                backgroundColor: emotion.color,
-                opacity: selected === emotion.label ? 1 : 0.7,
-                transform:
-                  selected === emotion.label ? "scale(1.1)" : "scale(1)",
-              }}
+              onClick={() => handleSelect(emotion)}
+              className={`emotion-button ${selected === emotion.label ? "emotion-button--active" : ""} ${selected && selected !== emotion.label ? "emotion-button--dimmed" : ""}`}
+              style={{ backgroundColor: emotion.color }}
             >
               <div className="emotion-emoji">{emotion.emoji}</div>
               <div className="emotion-label">{emotion.label}</div>
@@ -186,13 +247,60 @@ function EmotionCheck() {
           ))}
         </div>
 
-        {selected && (
-          <p className="selected-message">
-            오늘의 기분: <strong>{selected}</strong> 💫
-          </p>
-        )}
+        <div className={`emotion-result ${selected ? "emotion-result--visible" : ""}`}>
+          {currentEmotion && (
+            <>
+              <div className="result-emoji">{currentEmotion.emoji}</div>
+              <p className="result-message">{currentEmotion.message}</p>
+            </>
+          )}
+        </div>
 
         <div className="scroll-indicator">scroll ↓</div>
+      </div>
+    </section>
+  );
+}
+
+const ABOUT_CARDS = [
+  { label: "SEONGSU, 2026", title: "성수 팝업", color: "#F5B8C4" },
+  { label: "BRANDING STUDIO", title: "브랜딩 컨설팅", color: "#D6D48C" },
+  { label: "EMOTION DATA", title: "감정 데이터", color: "#8CBEE0" },
+  { label: "LONG-TERM GOAL", title: "Wee클래스 보급", color: "#E8A88C" },
+];
+
+function AboutStudio() {
+  return (
+    <section className="section section--warm">
+      <div className="section-content">
+        <div className="about-layout">
+          <div className="about-left">
+            <span className="step-label">About · Fillmore Studio</span>
+            <h2 className="about-title">
+              안녕하세요,
+              <br />
+              <span className="italic-bold">필모어 스튜디오</span>입니다.
+            </h2>
+            <p className="about-desc">
+              저희는 브랜드와 사람의 '빈 부분'을 채우는 브랜딩 컨설팅 회사예요.
+              감각을 넘어 본질을 채우는 일, 그게 저희가 하는 일입니다.
+            </p>
+            <p className="about-desc">
+              얼마 전에는 <strong>성수에서 'Fillconomy' 팝업</strong>을 열어 많은
+              분들과 직접 만나기도 했어요.
+            </p>
+          </div>
+          <div className="about-right">
+            <div className="about-cards">
+              {ABOUT_CARDS.map((card, idx) => (
+                <div key={idx} className="about-card" style={{ backgroundColor: card.color }}>
+                  <span className="about-card-label">{card.label}</span>
+                  <span className="about-card-title">{card.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -291,7 +399,7 @@ function Problem() {
 
 function Solution() {
   return (
-    <section id="solution" className="section section--cool">
+    <section id="solution" className="section section--warm">
       <div className="section-content">
         <span className="step-label">Step 04 · Our Solution</span>
         <h2 className="section-title">
@@ -618,6 +726,7 @@ export default function FeelComponents() {
     <div className="app">
       <Navigation />
       <Hero />
+      <AboutStudio />
       <EmotionCheck />
       <Feelconomy />
       <Problem />

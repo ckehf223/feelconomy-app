@@ -1643,6 +1643,7 @@
 }
 
 /* ========== Responsive: Tablet (max-width: 768px) ========== */
+/* ========== Responsive: Tablet (max-width: 768px) ========== */
 @media (max-width: 768px) {
   .nav {
     display: none;
@@ -1650,6 +1651,10 @@
 
   .navbar {
     padding: 0.75rem 1.5rem;
+  }
+
+  .logo-image {
+    height: 40px;
   }
 
   .hero {
@@ -1679,8 +1684,16 @@
     font-size: 1.3rem;
   }
 
+  .hero-float-item {
+    font-size: 1.4rem !important;
+  }
+
   .section {
     padding: 3.5rem 1.5rem;
+  }
+
+  .section-content {
+    padding: 0 1rem;
   }
 
   .section-title {
@@ -1700,6 +1713,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .emotion-emoji {
+    font-size: 3rem;
+  }
+
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1708,8 +1725,29 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .loop-detail--visible {
+    padding: 1.25rem 1.5rem;
+  }
+
   .phases-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .phase-card {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .discovery-section {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .discovery-item {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .discovery-number {
+    font-size: 1.4rem;
   }
 
   .stories-grid {
@@ -1718,6 +1756,21 @@
 
   .beta-steps {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .before-after-card {
+    min-height: 180px;
+    padding: 2rem 1.5rem;
+  }
+
+  .before-text,
+  .after-text {
+    font-size: 1.5rem;
   }
 
   .benefits-grid {
@@ -1731,6 +1784,19 @@
   .formula {
     font-size: 1.5rem;
   }
+
+  .form {
+    padding: 2rem 1.5rem;
+  }
+
+  .problem-item {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .problem-num {
+    font-size: 1.5rem;
+  }
 }
 
 /* ========== Responsive: Mobile (max-width: 480px) ========== */
@@ -1739,13 +1805,17 @@
     padding: 0.75rem 1rem;
   }
 
+  .logo-image {
+    height: 34px;
+  }
+
   .cta {
     padding: 0.6rem 1rem;
     font-size: 0.85rem;
   }
 
   .hero-layout {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     gap: 1.5rem;
   }
 
@@ -1761,13 +1831,48 @@
     font-size: 0.95rem;
   }
 
+  .hero-float-item {
+    font-size: 1rem !important;
+    opacity: 0.6;
+  }
+
+  .section {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .section-content {
+    padding: 0 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+  }
+
+  .step-label {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .about-layout {
+    gap: 1.5rem;
+  }
+
   .about-title {
     font-size: 1.7rem;
+  }
+
+  .about-cards {
+    gap: 0.6rem;
   }
 
   .about-card {
     min-height: 150px;
     padding: 1.3rem 1.2rem;
+    border-radius: 14px;
   }
 
   .about-card::before {
@@ -1779,16 +1884,25 @@
     font-size: 1.1rem;
   }
 
-  .section {
-    padding: 3rem 1rem;
+  .about-card-desc {
+    font-size: 0.75rem;
   }
 
-  .section-title {
-    font-size: 1.8rem;
+  .emotion-grid {
+    gap: 0.75rem;
   }
 
-  .section-desc {
-    font-size: 1rem;
+  .emotion-button {
+    padding: 1.5rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .emotion-emoji {
+    font-size: 2.5rem;
+  }
+
+  .emotion-label {
+    font-size: 0.85rem;
   }
 
   .product-grid {
@@ -1796,51 +1910,14 @@
     gap: 0.75rem;
   }
 
-  .emotion-loop {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 1rem;
-  }
-
-  .loop-item {
-    padding: 1.2rem 0.75rem;
-  }
-
-  .loop-icon {
-    font-size: 1.8rem;
-  }
-
-  .phases-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stories-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .beta-steps {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .before-after {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .before-after-card {
-    min-height: 200px;
-  }
-
-  .before-text,
-  .after-text {
-    font-size: 1.5rem;
-  }
-
-  .benefits-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .product-name {
+    font-size: 0.85rem;
+    padding: 2rem 0.75rem 0.75rem;
   }
 
   .feelconomy-explain {
     padding: 1.5rem 1rem;
+    border-radius: 10px;
   }
 
   .formula {
@@ -1849,7 +1926,8 @@
 
   .quote {
     font-size: 1.1rem;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 10px;
   }
 
   .quote::before {
@@ -1864,7 +1942,221 @@
     right: 0.5rem;
   }
 
+  .emotion-loop {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 12px;
+  }
+
+  .loop-item {
+    padding: 1.2rem 0.75rem;
+    border-radius: 10px;
+  }
+
+  .loop-icon {
+    font-size: 1.8rem;
+  }
+
+  .loop-label {
+    font-size: 0.9rem;
+  }
+
+  .loop-connector {
+    font-size: 0.8rem;
+  }
+
+  .loop-detail--visible {
+    padding: 1rem 1.25rem;
+  }
+
+  .loop-detail-icon {
+    font-size: 2rem;
+  }
+
+  .loop-detail-text {
+    font-size: 0.95rem;
+  }
+
+  .problem-list {
+    gap: 0.75rem;
+  }
+
+  .problem-item {
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .problem-num {
+    font-size: 1.3rem;
+  }
+
+  .problem-title {
+    font-size: 0.95rem;
+  }
+
+  .problem-desc {
+    font-size: 0.9rem;
+  }
+
+  .phases-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .phase-card {
+    padding: 1.75rem 1.25rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .phase-title {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+
+  .phase-desc {
+    font-size: 0.9rem;
+  }
+
+  .discovery-section {
+    padding: 2rem 1rem;
+    border-radius: 14px;
+  }
+
+  .discovery-title {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .discovery-list {
+    gap: 0.6rem;
+  }
+
+  .discovery-item {
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .discovery-number {
+    font-size: 1.3rem;
+  }
+
+  .discovery-text {
+    font-size: 0.95rem;
+  }
+
+  .stories-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .story-card {
+    border-radius: 12px;
+  }
+
+  .story-header {
+    padding: 1rem 1.25rem 0;
+  }
+
+  .story-quote {
+    padding: 0.75rem 1.25rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .beta-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .beta-step {
+    padding: 1.25rem 1rem 1rem;
+    border-radius: 10px;
+  }
+
+  .beta-step-num {
+    font-size: 0.8rem;
+  }
+
+  .beta-step-title {
+    font-size: 1rem;
+  }
+
+  .before-after {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .before-after-card {
+    min-height: 180px;
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .before-text,
+  .after-text {
+    font-size: 1.4rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .benefit-card {
+    padding: 1.5rem 0.75rem;
+    border-radius: 10px;
+  }
+
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .benefit-title {
+    font-size: 0.85rem;
+  }
+
+  .trust-grid {
+    gap: 0.75rem;
+  }
+
+  .trust-card {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+
+  .trust-title {
+    font-size: 0.95rem;
+  }
+
+  .trust-desc {
+    font-size: 0.9rem;
+  }
+
   .form {
     margin: 1.5rem auto;
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .submit-button {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
   }
 }

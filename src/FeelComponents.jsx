@@ -70,7 +70,7 @@ const DISCOVERIES = [
 
 const TESTIMONIALS = [
   {
-    demographic: "20대 대학생",
+    demographic: "김OO",
     topic: "반복 갈등 패턴 이해",
     topicColor: "#A8D4E6",
     barColor: "#7BB8D0",
@@ -78,7 +78,7 @@ const TESTIMONIALS = [
       "인간관계에서 계속 반복되는 갈등이 제 패턴이었다는 걸 알게 됐어요. 이제는 상황이 닥쳐도 왜 그런지 이해하고 대처할 수 있어요.",
   },
   {
-    demographic: "30대 직장인",
+    demographic: "박OO",
     topic: "스트레스 관리",
     topicColor: "#C8D4A0",
     barColor: "#A8C470",
@@ -86,7 +86,7 @@ const TESTIMONIALS = [
       "진로와 업무 스트레스가 쌓일 때마다 쓰러지던 제가, 나만의 회복 루틴을 찾고 훨씬 편해졌어요.",
   },
   {
-    demographic: "20대 직장인",
+    demographic: "이OO",
     topic: "연애 반응 패턴 이해",
     topicColor: "#F0C4C8",
     barColor: "#E8A0A8",
@@ -94,7 +94,7 @@ const TESTIMONIALS = [
       "어떤 상황에 예민하게 반응하는지 알고 나니, 연애에서 감정 조절이 훨씬 수월해졌어요.",
   },
   {
-    demographic: "대학원생",
+    demographic: "정OO",
     topic: "회복 루틴 설계",
     topicColor: "#A8D4A8",
     barColor: "#7BB87B",
@@ -102,7 +102,7 @@ const TESTIMONIALS = [
       "내 감정 구조를 이해하고 나니, 무기력할 때 어떻게 채워야 하는지 스스로 알게 됐어요.",
   },
   {
-    demographic: "40대 프리랜서",
+    demographic: "최OO",
     topic: "번아웃 회복",
     topicColor: "#D4B8E0",
     barColor: "#B090C8",
@@ -110,7 +110,7 @@ const TESTIMONIALS = [
       "일에 치여 감정을 무시하던 습관을 알게 됐어요. 이제는 지치기 전에 쉬는 타이밍을 스스로 찾아요.",
   },
   {
-    demographic: "10대 고등학생",
+    demographic: "한OO",
     topic: "시험 불안 관리",
     topicColor: "#E0D4A8",
     barColor: "#C8B878",
@@ -118,7 +118,7 @@ const TESTIMONIALS = [
       "시험 때마다 머리가 하얘지던 게 불안 패턴이었어요. 이제는 불안이 와도 대처법을 알아서 덜 무서워요.",
   },
   {
-    demographic: "20대 취준생",
+    demographic: "송OO",
     topic: "자존감 회복",
     topicColor: "#A8C8E0",
     barColor: "#78A8C8",
@@ -126,7 +126,7 @@ const TESTIMONIALS = [
       "면접에서 떨어질 때마다 나를 탓했는데, 그게 감정 패턴이란 걸 알고 나니 한결 편해졌어요.",
   },
   {
-    demographic: "30대 워킹맘",
+    demographic: "윤OO",
     topic: "감정 분리 연습",
     topicColor: "#F0D4B8",
     barColor: "#D8B090",
@@ -295,19 +295,201 @@ function WeatherOverlay({ type, animKey }) {
 
 // ========== 캐릭터 & 파티클 ==========
 
-const FLOAT_CHARS = [
-  { color: "#4A6BF5", eyes: "oo", shape: "ghost", top: 5, left: 3, size: 48 },
-  { color: "#FFD060", eyes: "^^", shape: "blob", top: 18, left: 88, size: 42 },
-  { color: "#5BAE7A", eyes: ":)", shape: "ghost", top: 32, left: 7, size: 38 },
-  { color: "#E86B6B", eyes: "oo", shape: "blob", top: 48, left: 92, size: 44 },
-  { color: "#F5A0B0", eyes: "^^", shape: "flower", top: 58, left: 18, size: 36 },
-  { color: "#9B7ED8", eyes: ":)", shape: "ghost", top: 68, left: 78, size: 46 },
-  { color: "#4A6BF5", eyes: "^^", shape: "blob", top: 78, left: 52, size: 40 },
-  { color: "#FFD060", eyes: "oo", shape: "ghost", top: 22, left: 42, size: 34 },
-  { color: "#5BAE7A", eyes: ":)", shape: "flower", top: 88, left: 12, size: 42 },
-  { color: "#E86B6B", eyes: "^^", shape: "ghost", top: 42, left: 62, size: 38 },
-  { color: "#9B7ED8", eyes: "oo", shape: "blob", top: 92, left: 82, size: 44 },
-  { color: "#F5A0B0", eyes: ":)", shape: "ghost", top: 12, left: 58, size: 36 },
+const DECO_ABOUT = [
+  {
+    color: "#5BAE7A",
+    eyes: ":)",
+    shape: "ghost",
+    top: "5%",
+    left: "92%",
+    size: 30,
+  },
+  {
+    color: "#F5A0B0",
+    eyes: "^^",
+    shape: "blob",
+    top: "70%",
+    left: "2%",
+    size: 26,
+  },
+  {
+    color: "#FFD060",
+    eyes: "oo",
+    shape: "flower",
+    top: "35%",
+    left: "96%",
+    size: 22,
+  },
+  {
+    color: "#A0C8F0",
+    eyes: ":)",
+    shape: "blob",
+    top: "15%",
+    left: "1%",
+    size: 20,
+  },
+];
+
+const DECO_FEELCONOMY = [
+  {
+    color: "#9B7ED8",
+    eyes: "oo",
+    shape: "ghost",
+    top: "8%",
+    left: "3%",
+    size: 28,
+  },
+  {
+    color: "#FFD060",
+    eyes: "^^",
+    shape: "blob",
+    top: "50%",
+    left: "94%",
+    size: 32,
+  },
+  {
+    color: "#F5A0B0",
+    eyes: ":)",
+    shape: "flower",
+    top: "85%",
+    left: "92%",
+    size: 22,
+  },
+  {
+    color: "#5BAE7A",
+    eyes: "^^",
+    shape: "ghost",
+    top: "20%",
+    left: "96%",
+    size: 20,
+  },
+  {
+    color: "#A0C8F0",
+    eyes: "oo",
+    shape: "blob",
+    top: "75%",
+    left: "1%",
+    size: 24,
+  },
+];
+
+const DECO_SOLUTION = [
+  {
+    color: "#4A6BF5",
+    eyes: ":)",
+    shape: "ghost",
+    top: "12%",
+    left: "95%",
+    size: 26,
+  },
+  {
+    color: "#E86B6B",
+    eyes: "^^",
+    shape: "blob",
+    top: "80%",
+    left: "2%",
+    size: 30,
+  },
+  {
+    color: "#FFD060",
+    eyes: "oo",
+    shape: "flower",
+    top: "5%",
+    left: "3%",
+    size: 22,
+  },
+  {
+    color: "#9B7ED8",
+    eyes: "^^",
+    shape: "ghost",
+    top: "60%",
+    left: "96%",
+    size: 20,
+  },
+];
+
+const DECO_STORIES = [
+  {
+    color: "#5BAE7A",
+    eyes: "^^",
+    shape: "ghost",
+    top: "15%",
+    left: "60%",
+    size: 24,
+  },
+  {
+    color: "#FFD060",
+    eyes: "oo",
+    shape: "blob",
+    top: "75%",
+    left: "45%",
+    size: 28,
+  },
+  {
+    color: "#F5A0B0",
+    eyes: ":)",
+    shape: "flower",
+    top: "8%",
+    left: "85%",
+    size: 20,
+  },
+  {
+    color: "#A0C8F0",
+    eyes: "^^",
+    shape: "ghost",
+    top: "85%",
+    left: "10%",
+    size: 22,
+  },
+];
+
+const JOURNEY_STEPS = [
+  {
+    num: "01",
+    icon: "🔍",
+    title: "Understand",
+    desc: "나의 감정과 패턴을 깊이 이해해요.",
+    color: "#F5A0A0",
+  },
+  {
+    num: "02",
+    icon: "🔗",
+    title: "Connect",
+    desc: "흩어진 감정과 생각을 연결해요.",
+    color: "#C4A0D8",
+  },
+  {
+    num: "03",
+    icon: "🧩",
+    title: "Fill",
+    desc: "필요한 영양을 채워 균형을 찾아요.",
+    color: "#7EC8A0",
+  },
+  {
+    num: "04",
+    icon: "🌱",
+    title: "Grow",
+    desc: "더 단단하고 빛나는 나로 성장해요.",
+    color: "#6BB8D0",
+  },
+  {
+    num: "05",
+    icon: "✨",
+    title: "Become",
+    desc: "완성된 나답게 살아가요.",
+    color: "#A0B8E0",
+  },
+];
+
+const JOURNEY_FLOATS = [
+  { emoji: "🌿", top: "8%", left: "5%", size: 18, delay: 0 },
+  { emoji: "🍃", top: "12%", left: "90%", size: 16, delay: 1.2 },
+  { emoji: "✨", top: "80%", left: "3%", size: 14, delay: 0.6 },
+  { emoji: "🌸", top: "6%", left: "48%", size: 15, delay: 2.0 },
+  { emoji: "🍃", top: "75%", left: "92%", size: 17, delay: 0.4 },
+  { emoji: "🌿", top: "45%", left: "95%", size: 14, delay: 1.8 },
+  { emoji: "✨", top: "88%", left: "50%", size: 13, delay: 1.0 },
+  { emoji: "🌸", top: "30%", left: "2%", size: 16, delay: 2.4 },
 ];
 
 function CharacterSvg({ color, eyes, shape, size = 40 }) {
@@ -322,8 +504,20 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
       </>
     ) : eyes === "^^" ? (
       <>
-        <path d={`M11 ${eyeY} Q15 ${eyeY - 4} 19 ${eyeY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <path d={`M21 ${eyeY} Q25 ${eyeY - 4} 29 ${eyeY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <path
+          d={`M11 ${eyeY} Q15 ${eyeY - 4} 19 ${eyeY}`}
+          stroke="#1a1a1a"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          d={`M21 ${eyeY} Q25 ${eyeY - 4} 29 ${eyeY}`}
+          stroke="#1a1a1a"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+        />
       </>
     ) : (
       <>
@@ -337,16 +531,31 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
   const mouthY = shape === "flower" ? 22 : 25;
   const mouth =
     eyes === ":)" ? (
-      <path d={`M15 ${mouthY} Q20 ${mouthY + 5} 25 ${mouthY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path
+        d={`M15 ${mouthY} Q20 ${mouthY + 5} 25 ${mouthY}`}
+        stroke="#1a1a1a"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+      />
     ) : eyes === "^^" ? (
-      <ellipse cx="20" cy={mouthY + 1} rx="2.5" ry="1.5" fill="rgba(0,0,0,0.12)" />
+      <ellipse
+        cx="20"
+        cy={mouthY + 1}
+        rx="2.5"
+        ry="1.5"
+        fill="rgba(0,0,0,0.12)"
+      />
     ) : (
       <circle cx="20" cy={mouthY + 1} r="2" fill="rgba(0,0,0,0.12)" />
     );
 
   const shapePath =
     shape === "ghost" ? (
-      <path d="M7 28 Q7 5 20 5 Q33 5 33 28 L31 24 L28 28 L25 24 L22 28 L19 24 L16 28 L13 24 L10 28 Z" fill={color} />
+      <path
+        d="M7 28 Q7 5 20 5 Q33 5 33 28 L31 24 L28 28 L25 24 L22 28 L19 24 L16 28 L13 24 L10 28 Z"
+        fill={color}
+      />
     ) : shape === "flower" ? (
       <>
         <circle cx="20" cy="7" r="8" fill={color} opacity="0.6" />
@@ -369,16 +578,21 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
   );
 }
 
-function FloatingParticles() {
+function SectionDecoChars({ chars }) {
   return (
-    <div className="floating-particles" aria-hidden="true">
-      {FLOAT_CHARS.map((ch, idx) => (
+    <div className="section-deco" aria-hidden="true">
+      {chars.map((ch, idx) => (
         <div
           key={idx}
-          className={`floating-particle floating-particle--${idx}`}
-          style={{ top: `${ch.top}%`, left: `${ch.left}%` }}
+          className="section-deco-item"
+          style={{ top: ch.top, left: ch.left }}
         >
-          <CharacterSvg color={ch.color} eyes={ch.eyes} shape={ch.shape} size={ch.size} />
+          <CharacterSvg
+            color={ch.color}
+            eyes={ch.eyes}
+            shape={ch.shape}
+            size={ch.size}
+          />
         </div>
       ))}
     </div>
@@ -388,11 +602,11 @@ function FloatingParticles() {
 // ========== 컴포넌트 ==========
 
 const HERO_BUBBLES = [
-  { emoji: "🌸", color: "#F5B8C4", size: 92, top: 8, left: 6, delay: 0 },
+  { emoji: "🌸", color: "#F5B8C4", size: 92, top: -8, left: 3, delay: 0 },
   { emoji: "⭐", color: "#FFE5B4", size: 74, top: 58, left: 14, delay: 0.8 },
-  { emoji: "💜", color: "#D4B8E0", size: 84, top: 14, left: 80, delay: 1.6 },
+  { emoji: "💜", color: "#D4B8E0", size: 84, top: -16, left: 80, delay: 1.6 },
   { emoji: "☁️", color: "#8CBEE0", size: 100, top: 62, left: 86, delay: 0.4 },
-  { emoji: "🫧", color: "#A8D4E6", size: 68, top: 4, left: 44, delay: 2.0 },
+  { emoji: "🫧", color: "#A8D4E6", size: 68, top: 15, left: 44, delay: 2.0 },
   { emoji: "💛", color: "#D6D48C", size: 80, top: 70, left: 48, delay: 1.2 },
 ];
 
@@ -408,19 +622,39 @@ function Navigation() {
           className="logo-image"
         />
         <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
-          <a href="#emotion" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+          <a
+            href="#emotion"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             기분 체크
           </a>
-          <a href="#feelconomy" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+          <a
+            href="#feelconomy"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             필코노미란?
           </a>
-          <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+          <a
+            href="#solution"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             솔루션
           </a>
-          <a href="#beta" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+          <a
+            href="#beta"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             체험단
           </a>
-          <a href="#apply" className="nav-cta" onClick={() => setIsMenuOpen(false)}>
+          <a
+            href="#apply"
+            className="nav-cta"
+            onClick={() => setIsMenuOpen(false)}
+          >
             무료 체험 신청
           </a>
         </nav>
@@ -473,46 +707,69 @@ function Hero() {
           </p>
           <p className="hero-ko">
             필모어 스튜디오는 당신의 빈 부분을 채워,
-            <br />
-            더 나다운 삶으로 가는 여정을 함께합니다.
+            <br />더 나다운 삶으로 가는 여정을 함께합니다.
           </p>
         </div>
       </div>
-
-      <a href="#emotion" className="hero-scroll" aria-label="아래로 스크롤">
-        <span className="hero-scroll-text">SCROLL</span>
-        <span className="hero-scroll-arrow">↓</span>
-      </a>
     </section>
   );
 }
 
-const MARQUEE_TEXT =
-  "FEEL · FILL · ECONOMY · BRANDING · EMOTION · POPUP · ";
-
-function MarqueeBanner() {
-  const line = MARQUEE_TEXT.repeat(6);
+function Journey() {
   return (
-    <div className="marquee">
-      <div className="marquee-row marquee-row--left">
-        <span className="marquee-text">{line}</span>
-        <span className="marquee-text" aria-hidden="true">
-          {line}
-        </span>
+    <section
+      className="section section--warm journey-section"
+      style={{ position: "relative" }}
+    >
+      <div className="journey-floating" aria-hidden="true">
+        {JOURNEY_FLOATS.map((f, i) => (
+          <span
+            key={i}
+            className="journey-float"
+            style={{
+              top: f.top,
+              left: f.left,
+              fontSize: `${f.size}px`,
+              animationDelay: `${f.delay}s`,
+            }}
+          >
+            {f.emoji}
+          </span>
+        ))}
       </div>
-      <div className="marquee-row marquee-row--right">
-        <span className="marquee-text marquee-text--outline">{line}</span>
-        <span className="marquee-text marquee-text--outline" aria-hidden="true">
-          {line}
-        </span>
+      <div className="section-content" style={{ textAlign: "center" }}>
+        <span className="step-label">The Journey</span>
+        <h2 className="section-title">
+          빈 조각을 채우는{" "}
+          <span className="title-accent journey-accent">다섯 단계</span>
+        </h2>
+        <p className="section-desc">
+          이해에서 완성까지, 나를 채워가는 여정을 함께 걸어요.
+        </p>
+
+        <div className="journey-cards">
+          {JOURNEY_STEPS.map((step, idx) => (
+            <div key={idx} className="journey-card">
+              <div
+                className="journey-card-bar"
+                style={{ backgroundColor: step.color }}
+              />
+              <span className="journey-card-num">{step.num}</span>
+              <span className="journey-card-icon">{step.icon}</span>
+              <h4 className="journey-card-title">{step.title}</h4>
+              <p className="journey-card-desc">{step.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 function AboutStudio() {
   return (
-    <section className="section section--warm">
+    <section className="section section--warm" style={{ position: "relative" }}>
+      <SectionDecoChars chars={DECO_ABOUT} />
       <div className="section-content">
         <div className="about-intro">
           <span className="step-label">About · Fillmore Studio</span>
@@ -523,9 +780,9 @@ function AboutStudio() {
           </h2>
           <p className="about-desc">
             저희는 브랜드와 사람의 '빈 부분'을 채우는 브랜딩 컨설팅 회사예요.
-            감각을 넘어 본질을 채우는 일, 그게 저희가 하는 일입니다.
-            얼마 전에는 <strong>성수에서 'Fillconomy' 팝업</strong>을 열어
-            많은 분들과 직접 만나기도 했어요.
+            감각을 넘어 본질을 채우는 일, 그게 저희가 하는 일입니다. 얼마 전에는{" "}
+            <strong>성수에서 'Fillconomy' 팝업</strong>을 열어 많은 분들과 직접
+            만나기도 했어요.
           </p>
         </div>
 
@@ -612,7 +869,12 @@ function EmotionCheck() {
 
 function Feelconomy() {
   return (
-    <section id="feelconomy" className="section">
+    <section
+      id="feelconomy"
+      className="section"
+      style={{ position: "relative" }}
+    >
+      <SectionDecoChars chars={DECO_FEELCONOMY} />
       <div className="section-content">
         <span className="step-label">Step 02 · What is Feelconomy?</span>
         <h2 className="section-title">
@@ -646,7 +908,7 @@ function Feelconomy() {
           </h3>
           <p className="reveal-sub">"기분을 채우기 위한 소비"</p>
           <blockquote className="reveal-quote">
-            하지만 대부분은 <em>즉각적 진통제</em>일 뿐,
+            하지만 대부분은 즉각적 진통제 일 뿐,
             <br />
             근본적인 회복은 아니에요.
           </blockquote>
@@ -680,11 +942,14 @@ function Problem() {
   return (
     <section className="section section--dark">
       <div className="section-content">
-        <span className="step-label step-label--light">Step 03 · The Problem</span>
+        <span className="step-label step-label--light">
+          Step 03 · The Problem
+        </span>
         <h2 className="section-title section-title--light">
           왜 우리는 자꾸
           <br />
-          <span className="title-accent">같은 감정</span>에 반복적으로 흔들릴까요?
+          <span className="title-accent">같은 감정</span>에 반복적으로
+          흔들릴까요?
         </h2>
 
         <div className="emotion-cycle">
@@ -738,7 +1003,12 @@ function Problem() {
 
 function Solution() {
   return (
-    <section id="solution" className="section section--warm">
+    <section
+      id="solution"
+      className="section section--warm"
+      style={{ position: "relative" }}
+    >
+      <SectionDecoChars chars={DECO_SOLUTION} />
       <div className="section-content">
         <span className="step-label">Step 04 · Our Solution</span>
         <h2 className="section-title">
@@ -864,13 +1134,16 @@ function Benefits() {
 
 function RealStories() {
   return (
-    <section className="section">
+    <section className="section" style={{ position: "relative" }}>
+      <SectionDecoChars chars={DECO_STORIES} />
       <div className="section-content">
         <span className="step-label">Step 07 · Real Stories</span>
         <h2 className="section-title">
           실제 참여자들의 <span className="title-accent">이야기</span>
         </h2>
-        <p className="section-desc">옆으로 넘겨 더 많은 이야기를 만나보세요 →</p>
+        <p className="section-desc">
+          옆으로 넘겨 더 많은 이야기를 만나보세요 →
+        </p>
       </div>
       <div className="stories-scroll">
         {TESTIMONIALS.map((story, idx) => (
@@ -1054,15 +1327,27 @@ function Footer() {
           © 2026 필모어 스튜디오 · Fillconomy. All rights reserved.
         </p>
         <div className="footer-links">
-          <a href="https://www.instagram.com/fillmore__studio?utm_source=qr" className="footer-link">
+          <a
+            href="https://www.instagram.com/fillmore__studio?utm_source=qr"
+            target="blank"
+            className="footer-link"
+          >
             Instagram
           </a>
           <span className="footer-dot">·</span>
-          <a href="https://blog.naver.com/fillmore_studio" className="footer-link">
+          <a
+            href="https://blog.naver.com/fillmore_studio"
+            className="footer-link"
+            target="blank"
+          >
             Blog
           </a>
           <span className="footer-dot">·</span>
-          <a href="https://moaform.com/q/Ygg1dz" className="footer-link">
+          <a
+            href="https://moaform.com/q/Ygg1dz"
+            className="footer-link"
+            target="blank"
+          >
             Moaform
           </a>
         </div>
@@ -1075,10 +1360,9 @@ function Footer() {
 export default function FeelComponents() {
   return (
     <div className="app">
-      <FloatingParticles />
       <Navigation />
       <Hero />
-      <MarqueeBanner />
+      <Journey />
       <AboutStudio />
       <EmotionCheck />
       <Feelconomy />

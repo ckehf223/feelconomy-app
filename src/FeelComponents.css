@@ -1,27 +1,31 @@
 /* ========== Base ========== */
 .app {
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #333;
-  line-height: 1.6;
+    "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Noto Sans KR", sans-serif;
+  color: #2a2a2a;
+  line-height: 1.85;
   overflow-x: hidden;
-  background-color: #f5ebe0;
+  background-color: #fff8f2;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
 }
 
 .italic {
   font-style: italic;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
 }
 
 .italic-bold {
   font-style: italic;
   font-weight: bold;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
 }
 
 .non-italic-bold {
   font-weight: bold;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
 }
 
 /* ========== Floating Particles ========== */
@@ -110,12 +114,13 @@
 
 .nav-link {
   text-decoration: none;
-  color: #000000;
-  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   transition: color 0.3s;
   cursor: pointer;
   white-space: nowrap;
-  font-weight: bold;
 }
 
 .nav-link:hover {
@@ -211,18 +216,19 @@
 }
 
 .hero-title {
-  font-family: "Georgia", "Times New Roman", "Playfair Display", serif;
-  font-size: clamp(4rem, 13vw, 11rem);
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: clamp(3.2rem, 10vw, 8rem);
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 1.0;
   color: #1a1a1a;
   margin: 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .hero-title-accent {
-  color: #e07a5f;
+  color: #f5a0b0;
   font-style: italic;
+  letter-spacing: -0.01em;
 }
 
 /* Floating emoji bubbles */
@@ -262,7 +268,7 @@
 }
 
 .hero-subtitle {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
   font-size: clamp(1.2rem, 2.2vw, 1.7rem);
   color: #333;
   line-height: 1.5;
@@ -272,9 +278,10 @@
 
 .hero-ko {
   font-size: 1.05rem;
-  color: #6b6b6b;
-  line-height: 1.9;
+  color: #888;
+  line-height: 2.0;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 /* Scroll Indicator */
@@ -332,7 +339,7 @@
 }
 
 .marquee-text {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
   font-size: clamp(2rem, 5vw, 3.6rem);
   font-weight: 800;
   color: #e07a5f;
@@ -385,14 +392,14 @@
 
 .step-label {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #666;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
+  color: #7ec8a0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 0.4rem 1rem;
-  border: 1.5px solid #999;
+  padding: 0.4rem 1.2rem;
+  border: 1.5px solid rgba(126, 200, 160, 0.4);
   border-radius: 50px;
 }
 
@@ -403,11 +410,13 @@
 }
 
 .section-title {
-  font-size: 2.8rem;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 700;
   margin-bottom: 1.5rem;
   color: #1a1a1a;
   line-height: 1.35;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .section--cool .section-title,
@@ -426,10 +435,11 @@
 }
 
 .section-desc {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #777;
+  margin-bottom: 1.5rem;
+  line-height: 1.85;
+  letter-spacing: -0.01em;
 }
 
 .section--cool .section-desc {
@@ -455,11 +465,11 @@
 }
 
 .about-title {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 800;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
   color: #1a1a1a;
-  line-height: 1.25;
+  line-height: 1.35;
   margin: 1rem 0 1.5rem;
 }
 
@@ -468,10 +478,11 @@
 }
 
 .about-desc {
-  font-size: 1.05rem;
-  color: #666;
+  font-size: 1rem;
+  color: #777;
   line-height: 1.9;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .about-cards {
@@ -1009,6 +1020,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s;
+  margin: 0;
 }
 
 .product-card:hover {
@@ -1078,7 +1090,7 @@
   align-items: baseline;
   justify-content: center;
   gap: 0.6rem;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 800;
   margin: 0 0 1.5rem;
@@ -1773,7 +1785,7 @@
 }
 
 .footer-watermark {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Playfair Display", "Georgia", serif;
   font-size: clamp(3rem, 16vw, 13rem);
   font-weight: 900;
   color: transparent;
@@ -2056,6 +2068,11 @@
 
   .emotion-label {
     font-size: 0.9rem;
+  }
+
+  .product-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 
   .product-gallery {

@@ -1054,16 +1054,16 @@ function Footer() {
           © 2026 필모어 스튜디오 · Fillconomy. All rights reserved.
         </p>
         <div className="footer-links">
-          <a href="#" className="footer-link">
+          <a href="https://www.instagram.com/fillmore__studio?utm_source=qr" className="footer-link">
             Instagram
           </a>
           <span className="footer-dot">·</span>
-          <a href="#" className="footer-link">
-            LinkedIn
+          <a href="https://blog.naver.com/fillmore_studio" className="footer-link">
+            Blog
           </a>
           <span className="footer-dot">·</span>
-          <a href="#" className="footer-link">
-            Behance
+          <a href="https://moaform.com/q/Ygg1dz" className="footer-link">
+            Moaform
           </a>
         </div>
       </div>

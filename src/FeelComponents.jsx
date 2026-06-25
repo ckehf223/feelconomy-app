@@ -293,6 +293,98 @@ function WeatherOverlay({ type, animKey }) {
   return null;
 }
 
+// ========== 캐릭터 & 파티클 ==========
+
+const FLOAT_CHARS = [
+  { color: "#4A6BF5", eyes: "oo", shape: "ghost", top: 5, left: 3, size: 48 },
+  { color: "#FFD060", eyes: "^^", shape: "blob", top: 18, left: 88, size: 42 },
+  { color: "#5BAE7A", eyes: ":)", shape: "ghost", top: 32, left: 7, size: 38 },
+  { color: "#E86B6B", eyes: "oo", shape: "blob", top: 48, left: 92, size: 44 },
+  { color: "#F5A0B0", eyes: "^^", shape: "flower", top: 58, left: 18, size: 36 },
+  { color: "#9B7ED8", eyes: ":)", shape: "ghost", top: 68, left: 78, size: 46 },
+  { color: "#4A6BF5", eyes: "^^", shape: "blob", top: 78, left: 52, size: 40 },
+  { color: "#FFD060", eyes: "oo", shape: "ghost", top: 22, left: 42, size: 34 },
+  { color: "#5BAE7A", eyes: ":)", shape: "flower", top: 88, left: 12, size: 42 },
+  { color: "#E86B6B", eyes: "^^", shape: "ghost", top: 42, left: 62, size: 38 },
+  { color: "#9B7ED8", eyes: "oo", shape: "blob", top: 92, left: 82, size: 44 },
+  { color: "#F5A0B0", eyes: ":)", shape: "ghost", top: 12, left: 58, size: 36 },
+];
+
+function CharacterSvg({ color, eyes, shape, size = 40 }) {
+  const eyeY = shape === "flower" ? 16 : 18;
+  const eyeContent =
+    eyes === "oo" ? (
+      <>
+        <circle cx="14" cy={eyeY} r="3.5" fill="#fff" />
+        <circle cx="26" cy={eyeY} r="3.5" fill="#fff" />
+        <circle cx="15" cy={eyeY} r="2" fill="#1a1a1a" />
+        <circle cx="27" cy={eyeY} r="2" fill="#1a1a1a" />
+      </>
+    ) : eyes === "^^" ? (
+      <>
+        <path d={`M11 ${eyeY} Q15 ${eyeY - 4} 19 ${eyeY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <path d={`M21 ${eyeY} Q25 ${eyeY - 4} 29 ${eyeY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
+      </>
+    ) : (
+      <>
+        <circle cx="14" cy={eyeY} r="3" fill="#fff" />
+        <circle cx="26" cy={eyeY} r="3" fill="#fff" />
+        <circle cx="15" cy={eyeY + 0.5} r="1.5" fill="#1a1a1a" />
+        <circle cx="27" cy={eyeY + 0.5} r="1.5" fill="#1a1a1a" />
+      </>
+    );
+
+  const mouthY = shape === "flower" ? 22 : 25;
+  const mouth =
+    eyes === ":)" ? (
+      <path d={`M15 ${mouthY} Q20 ${mouthY + 5} 25 ${mouthY}`} stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
+    ) : eyes === "^^" ? (
+      <ellipse cx="20" cy={mouthY + 1} rx="2.5" ry="1.5" fill="rgba(0,0,0,0.12)" />
+    ) : (
+      <circle cx="20" cy={mouthY + 1} r="2" fill="rgba(0,0,0,0.12)" />
+    );
+
+  const shapePath =
+    shape === "ghost" ? (
+      <path d="M7 28 Q7 5 20 5 Q33 5 33 28 L31 24 L28 28 L25 24 L22 28 L19 24 L16 28 L13 24 L10 28 Z" fill={color} />
+    ) : shape === "flower" ? (
+      <>
+        <circle cx="20" cy="7" r="8" fill={color} opacity="0.6" />
+        <circle cx="11" cy="14" r="8" fill={color} opacity="0.6" />
+        <circle cx="29" cy="14" r="8" fill={color} opacity="0.6" />
+        <circle cx="13" cy="24" r="8" fill={color} opacity="0.6" />
+        <circle cx="27" cy="24" r="8" fill={color} opacity="0.6" />
+        <circle cx="20" cy="17" r="11" fill={color} />
+      </>
+    ) : (
+      <ellipse cx="20" cy="19" rx="16" ry="15" fill={color} />
+    );
+
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 34" fill="none">
+      {shapePath}
+      {eyeContent}
+      {mouth}
+    </svg>
+  );
+}
+
+function FloatingParticles() {
+  return (
+    <div className="floating-particles" aria-hidden="true">
+      {FLOAT_CHARS.map((ch, idx) => (
+        <div
+          key={idx}
+          className={`floating-particle floating-particle--${idx}`}
+          style={{ top: `${ch.top}%`, left: `${ch.left}%` }}
+        >
+          <CharacterSvg color={ch.color} eyes={ch.eyes} shape={ch.shape} size={ch.size} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ========== 컴포넌트 ==========
 
 const HERO_BUBBLES = [
@@ -983,6 +1075,7 @@ function Footer() {
 export default function FeelComponents() {
   return (
     <div className="app">
+      <FloatingParticles />
       <Navigation />
       <Hero />
       <MarqueeBanner />

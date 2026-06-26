@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
+import html2canvas from "html2canvas";
 import "./FeelComponents.css";
 
 const EMOTIONS = [
@@ -80,7 +81,8 @@ const TESTIMONIALS = [
     demographic: "이OO",
     topic: "연애 반응 패턴 이해",
     topicColor: "#F0C4C8",
-    quote: "어떤 상황에 예민하게 반응하는지 알고 나니 감정 조절이 수월해졌어요.",
+    quote:
+      "어떤 상황에 예민하게 반응하는지 알고 나니 감정 조절이 수월해졌어요.",
   },
   {
     demographic: "정OO",
@@ -115,29 +117,72 @@ const TESTIMONIALS = [
 ];
 
 const BENEFITS = [
-  { icon: "🧠", title: "나의 감정 구조 이해" },
-  { icon: "❤️", title: "인간관계 패턴 분석" },
-  { icon: "💼", title: "진로·취업 스트레스 관리" },
-  { icon: "💘", title: "연애 반응 패턴 이해" },
-  { icon: "🌱", title: "회복 루틴 설계" },
+  {
+    icon: "🧠",
+    title: "감정 구조 리포트",
+    desc: "나의 감정이 어떤 구조로 작동하는지 시각화된 분석 결과를 받아요.",
+  },
+  {
+    icon: "🔁",
+    title: "반복 패턴 진단",
+    desc: "인간관계·연애·스트레스에서 반복되는 나만의 패턴을 정확히 짚어드려요.",
+  },
+  {
+    icon: "📋",
+    title: "맞춤 회복 루틴표",
+    desc: "내 성격과 환경에 맞는 구체적인 회복 전략을 문서로 제공해요.",
+  },
+  {
+    icon: "🗣️",
+    title: "1:1 전문 코칭 2회",
+    desc: "전문 코치와 함께 감정 패턴을 분석하고 방향을 설계하는 깊은 대화.",
+  },
+  {
+    icon: "📊",
+    title: "변화 추적 시트",
+    desc: "프로그램 전후 감정 변화를 직접 비교할 수 있는 셀프 체크 도구.",
+  },
+  {
+    icon: "💬",
+    title: "사후 피드백 1회",
+    desc: "프로그램 종료 2주 후, 변화가 유지되고 있는지 점검하는 팔로업 세션.",
+  },
+];
+
+const GOODS_OPTIONS = [
+  {
+    name: "키캡",
+    desc: "감정을 담은 아트 키캡",
+    image: "/assets/goods-keycap.png",
+  },
+  {
+    name: "왁뿌볼",
+    desc: "말랑말랑 스트레스 해소",
+    image: "/assets/goods-ball.png",
+  },
+  {
+    name: "슬라임",
+    desc: "촉감으로 느끼는 안정감",
+    image: "/assets/goods-slime.png",
+  },
 ];
 
 const TRUST_POINTS = [
   {
-    title: "전문 코치와 협업",
-    desc: "감정·관계·진로 분야의 전문 코치가 1:1로 동행합니다.",
+    title: "일회성 상담이 아닌 구조화된 여정",
+    desc: "단발성 대화가 아니라, 단계별로 설계된 프로그램을 따라가며 스스로 변화를 체감합니다.",
   },
   {
-    title: "사례 데이터 축적 중",
-    desc: "실제 참여자 데이터를 기반으로 회복 모델을 정교화하고 있어요.",
+    title: "감정이 아닌 '패턴'에 집중",
+    desc: "지금의 감정보다 반복되는 구조를 파악해, 같은 자리에서 맴도는 루프를 끊습니다.",
   },
   {
-    title: "실제 테스트 진행 중",
-    desc: "현재 베타 그룹에서 1:1 세션을 운영하며 결과를 검증하고 있습니다.",
+    title: "나만의 회복 매뉴얼을 설계",
+    desc: "일반적인 조언이 아니라, 내 성격과 환경에 맞는 구체적인 회복 루틴을 함께 만듭니다.",
   },
   {
-    title: "청소년 Wee클래스 보급 목표",
-    desc: "장기적으로 학교 현장의 정서지원 모델로 확장하는 것을 목표로 합니다.",
+    title: "프로그램 이후에도 스스로 작동",
+    desc: "코칭이 끝나도 혼자서 감정을 읽고 대응할 수 있는 자기 관리 역량을 남깁니다.",
   },
 ];
 
@@ -341,45 +386,130 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    const next = !isMenuOpen;
+    setIsMenuOpen(next);
+    document.body.style.overflow = next ? "hidden" : "";
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = "";
+  };
+
   return (
-    <header className="header">
-      <div className="navbar">
-        <a href="#" className="logo">
-          <img
-            src="/assets/fillmore-studio-logo.png"
-            alt="Fillmore Studio"
-            className="logo-image"
-          />
-        </a>
-        <nav className={`nav ${isMenuOpen ? "nav--open" : ""}`}>
-          <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
-          <a href="#feelconomy" className="nav-link" onClick={() => setIsMenuOpen(false)}>Program</a>
-          <a href="#solution" className="nav-link" onClick={() => setIsMenuOpen(false)}>Studio</a>
-          <a href="#stories" className="nav-link" onClick={() => setIsMenuOpen(false)}>Journal</a>
-          <a href="#apply" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contact</a>
-        </nav>
-        <div className="header-right">
-          <a href="#apply" className="nav-cta">
-            Start Your Journey <span className="cta-arrow">→</span>
+    <>
+      <header className="header">
+        <div className="navbar">
+          <a href="#" className="logo">
+            <div className="nav-logo-image"></div>
           </a>
-          <button
-            className={`hamburger ${isMenuOpen ? "hamburger--active" : ""}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="메뉴"
-          >
-            <span className="hamburger-line" />
-            <span className="hamburger-line" />
-            <span className="hamburger-line" />
-          </button>
+          <nav className="nav nav--desktop">
+            <a href="#about" className="nav-link">
+              About
+            </a>
+            <a href="#feelconomy" className="nav-link">
+              Program
+            </a>
+            <a href="#solution" className="nav-link">
+              Studio
+            </a>
+            <a href="#stories" className="nav-link">
+              Journal
+            </a>
+            <a href="#contact" className="nav-link">
+              Contact
+            </a>
+          </nav>
+          <div className="header-right">
+            <a href="#apply" className="nav-cta">
+              Start Your Journey <span className="cta-arrow">→</span>
+            </a>
+            <button
+              className={`hamburger ${isMenuOpen ? "hamburger--active" : ""}`}
+              onClick={toggleMenu}
+              aria-label="메뉴"
+            >
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {isMenuOpen && (
+        <div className="mobile-menu">
+          <button
+            className="mobile-menu-close"
+            onClick={closeMenu}
+            aria-label="닫기"
+          >
+            ✕
+          </button>
+          <a href="#about" className="mobile-menu-link" onClick={closeMenu}>
+            About
+          </a>
+          <a
+            href="#feelconomy"
+            className="mobile-menu-link"
+            onClick={closeMenu}
+          >
+            Program
+          </a>
+          <a href="#solution" className="mobile-menu-link" onClick={closeMenu}>
+            Studio
+          </a>
+          <a href="#stories" className="mobile-menu-link" onClick={closeMenu}>
+            Journal
+          </a>
+          <a href="#contact" className="mobile-menu-link" onClick={closeMenu}>
+            Contact
+          </a>
+          <a href="#apply" className="mobile-menu-cta" onClick={closeMenu}>
+            Start Your Journey
+          </a>
+        </div>
+      )}
+    </>
   );
 }
+
+const FLOATING_CHARS = [
+  { color: "#FFD060", eyes: "oo", shape: "flower", className: "float-char--1" },
+  { color: "#5BAE7A", eyes: "^^", shape: "ghost", className: "float-char--2" },
+  { color: "#F5A0B0", eyes: ":)", shape: "blob", className: "float-char--3" },
+  { color: "#9B7ED8", eyes: "^^", shape: "ghost", className: "float-char--4" },
+  { color: "#6BB8D0", eyes: "oo", shape: "flower", className: "float-char--5" },
+  { color: "#FFD060", eyes: ":)", shape: "blob", className: "float-char--6" },
+  { color: "#F5A0B0", eyes: "oo", shape: "flower", className: "float-char--7" },
+  { color: "#5BAE7A", eyes: ":)", shape: "blob", className: "float-char--8" },
+];
 
 function Hero() {
   return (
     <section className="hero">
+      {FLOATING_CHARS.map((ch, i) => (
+        <div key={i} className={`float-char ${ch.className}`}>
+          <CharacterSvg
+            color={ch.color}
+            eyes={ch.eyes}
+            shape={ch.shape}
+            size={
+              ch.className.includes("1") || ch.className.includes("5")
+                ? 52
+                : ch.className.includes("3") || ch.className.includes("7")
+                  ? 44
+                  : 38
+            }
+          />
+        </div>
+      ))}
+
+      <div className="hero-deco hero-deco--1" />
+      <div className="hero-deco hero-deco--2" />
+      <div className="hero-deco hero-deco--3" />
+
       <div className="hero-grid">
         <div className="hero-text">
           <p className="hero-eyebrow">EMOTIONS CONNECT. WE FILL.</p>
@@ -397,13 +527,15 @@ function Hero() {
             <a href="#solution" className="btn-primary">
               Our Program <span className="btn-arrow">→</span>
             </a>
-            <a href="#about" className="btn-ghost">About Us</a>
+            <a href="#about" className="btn-ghost">
+              About Us
+            </a>
           </div>
         </div>
 
         <div className="hero-visual">
           <img
-            src="/assets/puzzle-head.png"
+            src="/assets/puzzle-head-noback.png"
             alt="감정 퍼즐 조각들이 모여 하나의 머리를 이루는 일러스트"
             className="puzzle-head-img"
           />
@@ -424,7 +556,7 @@ function JourneyStrip() {
                 color={step.character.color}
                 eyes={step.character.eyes}
                 shape={step.character.shape}
-                size={36}
+                size={48}
               />
             </div>
             <div className="strip-text">
@@ -459,7 +591,11 @@ function AboutStudio() {
 
         <div className="about-grid">
           {ABOUT_CARDS.map((card, idx) => (
-            <div key={idx} className="about-card" style={{ backgroundColor: card.color }}>
+            <div
+              key={idx}
+              className="about-card"
+              style={{ backgroundColor: card.color }}
+            >
               <div className="about-card-head">
                 <span className="about-card-tag">{card.label}</span>
                 <span className="about-card-icon">{card.icon}</span>
@@ -476,6 +612,70 @@ function AboutStudio() {
   );
 }
 
+function generateRaindrops() {
+  return Array.from({ length: 40 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 1.5,
+    duration: 0.6 + Math.random() * 0.6,
+    opacity: 0.3 + Math.random() * 0.5,
+  }));
+}
+
+function WeatherOverlay({ type, animKey }) {
+  const [raindrops] = useState(() => generateRaindrops());
+
+  if (type === "햇살") {
+    return (
+      <div key={animKey} className="weather-overlay weather-sun">
+        <div className="sun-glow" />
+        <div className="sun-rays" />
+      </div>
+    );
+  }
+  if (type === "구름") {
+    return (
+      <div key={animKey} className="weather-overlay weather-cloud">
+        <div className="cloud-fog cloud-fog--1" />
+        <div className="cloud-fog cloud-fog--2" />
+        <div className="cloud-fog cloud-fog--3" />
+        <div className="cloud-shape cloud-shape--1">☁️</div>
+        <div className="cloud-shape cloud-shape--2">☁️</div>
+        <div className="cloud-shape cloud-shape--3">🌥️</div>
+        <div className="cloud-shape cloud-shape--4">☁️</div>
+        <div className="cloud-shape cloud-shape--5">🌥️</div>
+      </div>
+    );
+  }
+  if (type === "비") {
+    return (
+      <div key={animKey} className="weather-overlay weather-rain">
+        {raindrops.map((d) => (
+          <div
+            key={d.id}
+            className="raindrop"
+            style={{
+              left: `${d.left}%`,
+              animationDelay: `${d.delay}s`,
+              animationDuration: `${d.duration}s`,
+              opacity: d.opacity,
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+  if (type === "번개") {
+    return (
+      <div key={animKey} className="weather-overlay weather-lightning">
+        <div className="lightning-flash" />
+        <div className="lightning-bolt">⚡</div>
+      </div>
+    );
+  }
+  return null;
+}
+
 function EmotionCheck() {
   const [selected, setSelected] = useState(null);
   const [animKey, setAnimKey] = useState(0);
@@ -486,14 +686,22 @@ function EmotionCheck() {
   const cur = EMOTIONS.find((e) => e.label === selected);
 
   return (
-    <section id="emotion" className="sec sec--alt">
-      <div className="sec-inner">
+    <section
+      id="emotion"
+      className={`sec sec--alt emo-sec ${selected ? `emo-sec--${selected}` : ""}`}
+    >
+      {selected && <WeatherOverlay type={selected} animKey={animKey} />}
+
+      <div className="sec-inner emo-content">
         <span className="tag">Step 01 · Emotion Check</span>
         <h2 className="sec-title">
           오늘 기분, <span className="accent">날씨</span>로 표현하면
-          <br />어떤 날씨인가요?
+          <br />
+          어떤 날씨인가요?
         </h2>
-        <p className="sec-desc">지금 내 감정 상태를 <strong>10초 안에</strong> 확인해보세요.</p>
+        <p className="sec-desc">
+          지금 내 감정 상태를 <strong>10초 안에</strong> 확인해보세요.
+        </p>
 
         <div className="emo-grid">
           {EMOTIONS.map((em) => (
@@ -512,7 +720,9 @@ function EmotionCheck() {
         <div className={`emo-result ${selected ? "emo-result--show" : ""}`}>
           {cur && (
             <>
-              <div className="emo-result-icon" key={animKey}>{cur.emoji}</div>
+              <div className="emo-result-icon" key={animKey}>
+                {cur.emoji}
+              </div>
               <p className="emo-result-msg">{cur.message}</p>
             </>
           )}
@@ -528,8 +738,9 @@ function Feelconomy() {
       <div className="sec-inner">
         <span className="tag">Step 02 · What is Feelconomy?</span>
         <h2 className="sec-title">
-          우리는 기분을 위해
-          <br />소비합니다.
+          우리는 <span className="accent">기분</span>을 위해
+          <br />
+          소비합니다.
         </h2>
 
         <div className="prod-grid">
@@ -553,7 +764,8 @@ function Feelconomy() {
           <p className="reveal-sub">"기분을 채우기 위한 소비"</p>
           <blockquote className="reveal-quote">
             하지만 대부분은 즉각적 진통제 일 뿐,
-            <br />근본적인 회복은 아니에요.
+            <br />
+            근본적인 회복은 아니에요.
           </blockquote>
         </div>
       </div>
@@ -585,7 +797,9 @@ function Problem() {
                 <span className="loop-icon">{it.icon}</span>
                 <span className="loop-name">{it.label}</span>
               </button>
-              {i < LOOP_ITEMS.length - 1 && <span className="loop-arrow">→</span>}
+              {i < LOOP_ITEMS.length - 1 && (
+                <span className="loop-arrow">→</span>
+              )}
             </div>
           ))}
           <div className="loop-back">
@@ -594,9 +808,14 @@ function Problem() {
           </div>
         </div>
 
-        <div className={`loop-detail ${active !== null ? "loop-detail--show" : ""}`}>
+        <div
+          className={`loop-detail ${active !== null ? "loop-detail--show" : ""}`}
+        >
           {active !== null && (
-            <p><strong>{LOOP_ITEMS[active].label}</strong> — {LOOP_ITEMS[active].detail}</p>
+            <p>
+              <strong>{LOOP_ITEMS[active].label}</strong> —{" "}
+              {LOOP_ITEMS[active].detail}
+            </p>
           )}
         </div>
 
@@ -628,7 +847,8 @@ function Solution() {
         </h2>
         <p className="sec-desc">
           스트레스와 불안을 스스로 이해하고 관리할 수 있도록,
-          <br />전문 코치와 함께하는 구조화된 프로그램입니다.
+          <br />
+          전문 코치와 함께하는 구조화된 프로그램입니다.
         </p>
 
         <div className="phase-grid">
@@ -648,11 +868,28 @@ function Solution() {
           <div className="disc-list">
             {DISCOVERIES.map((d, i) => (
               <div key={i} className="disc-row">
-                <span className="disc-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="disc-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <p className="disc-text">{d}</p>
               </div>
             ))}
           </div>
+        </div>
+
+        <h3 className="trust-heading">
+          다른 상담과 <span className="accent">무엇이 다른가요?</span>
+        </h3>
+        <div className="trust-grid">
+          {TRUST_POINTS.map((t, i) => (
+            <div key={i} className="trust-card">
+              <span className="trust-num">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h4 className="trust-title">{t.title}</h4>
+              <p className="trust-desc">{t.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -670,7 +907,8 @@ function BetaProgram() {
         <p className="sec-desc">
           <strong>30만 원 상당</strong> 프로그램을 사전 체험단에게{" "}
           <strong>무료</strong>로 제공합니다.
-          <br />연령대·직업군을 고려해 진짜 변화를 원하시는 분 중심으로 선정해요.
+          <br />
+          연령대·직업군을 고려해 진짜 변화를 원하시는 분 중심으로 선정해요.
         </p>
 
         <div className="beta-grid">
@@ -685,13 +923,24 @@ function BetaProgram() {
         <div className="ba-row">
           <div className="ba ba--before">
             <span className="ba-tag">BEFORE</span>
-            <p className="ba-quote">"왜 힘든지<br />모르겠음."</p>
+            <p className="ba-quote">
+              "왜 힘든지
+              <br />
+              모르겠음."
+            </p>
             <span className="ba-emoji">😶‍🌫️</span>
           </div>
-          <div className="ba-mid"><span className="ba-arrow">→</span></div>
+          <div className="ba-mid">
+            <span className="ba-arrow">→</span>
+          </div>
           <div className="ba ba--after">
             <span className="ba-tag">AFTER</span>
-            <p className="ba-quote">"내가 왜<br />반복되는지<br />알게 됨."</p>
+            <p className="ba-quote">
+              "내가 왜<br />
+              반복되는지
+              <br />
+              알게 됨."
+            </p>
             <span className="ba-emoji">🌈</span>
           </div>
         </div>
@@ -708,13 +957,35 @@ function Benefits() {
         <h2 className="sec-title">
           참여하면 <span className="accent">이런 걸</span> 얻어요
         </h2>
+        <p className="sec-desc">
+          단순한 상담이 아닙니다. 프로그램을 마치면 눈에 보이는 결과물과 변화를
+          가져갑니다.
+        </p>
         <div className="ben-grid">
           {BENEFITS.map((b, i) => (
             <div key={i} className="ben-card">
               <div className="ben-icon">{b.icon}</div>
               <p className="ben-title">{b.title}</p>
+              <p className="ben-desc">{b.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="goods-section">
+          <h3 className="goods-heading">
+            🎁 참여자 전원에게 <span className="accent">감정 굿즈</span>를
+            드려요
+          </h3>
+          <p className="goods-sub">아래 3가지 중 1가지를 선택할 수 있어요.</p>
+          <div className="goods-grid">
+            {GOODS_OPTIONS.map((g, i) => (
+              <div key={i} className="goods-card">
+                <img src={g.image} alt={g.name} className="goods-img" />
+                <strong className="goods-name">{g.name}</strong>
+                <span className="goods-desc">{g.desc}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -736,7 +1007,10 @@ function RealStories() {
           <article key={i} className="story-card">
             <div className="story-head">
               <span className="story-name">{s.demographic}</span>
-              <span className="story-topic" style={{ backgroundColor: s.topicColor }}>
+              <span
+                className="story-topic"
+                style={{ backgroundColor: s.topicColor }}
+              >
                 {s.topic}
               </span>
             </div>
@@ -748,71 +1022,185 @@ function RealStories() {
   );
 }
 
-function WhyTrust() {
-  return (
-    <section className="sec sec--alt">
-      <div className="sec-inner">
-        <span className="tag">Step 08 · Why Trust Us</span>
-        <h2 className="sec-title">
-          우리는 단순 <span className="accent">상담 서비스</span>가 아닙니다.
-        </h2>
-        <div className="trust-grid">
-          {TRUST_POINTS.map((t, i) => (
-            <div key={i} className="trust-card">
-              <span className="trust-num">{String(i + 1).padStart(2, "0")}</span>
-              <h4 className="trust-title">{t.title}</h4>
-              <p className="trust-desc">{t.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ApplyForm() {
-  const [fd, setFd] = useState({ name: "", birthDate: "", job: "", phone: "", concern: "", available: "" });
-  const set = (e) => { const { name, value } = e.target; setFd((p) => ({ ...p, [name]: value })); };
+  const sectionRef = useRef(null);
+  const [fd, setFd] = useState({
+    name: "",
+    birthDate: "",
+    job: "",
+    phone: "",
+    mbti: "",
+    location: "",
+    concern: "",
+    available: "",
+  });
+  const set = (e) => {
+    const { name, value } = e.target;
+    setFd((p) => ({ ...p, [name]: value }));
+  };
   const submit = (e) => {
     e.preventDefault();
     alert(`신청 완료!\n이름: ${fd.name}\n연락처: ${fd.phone}`);
-    setFd({ name: "", birthDate: "", job: "", phone: "", concern: "", available: "" });
+  };
+  const capture = async () => {
+    if (!sectionRef.current) return;
+    const canvas = await html2canvas(sectionRef.current, {
+      backgroundColor: "#FFF8F3",
+      scale: 2,
+    });
+    const link = document.createElement("a");
+    link.download = "fillmore-apply.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
   };
 
   return (
-    <section id="apply" className="sec sec--dark">
-      <div className="sec-inner">
-        <span className="tag tag--light">Step 09 · Apply</span>
-        <h2 className="sec-title sec-title--light">
-          무료 체험단 <span className="accent">신청하기</span>
-        </h2>
-        <form className="form" onSubmit={submit}>
-          <div className="fg">
-            <label className="fl">이름</label>
-            <input type="text" name="name" value={fd.name} onChange={set} required className="fi" placeholder="이름을 입력하세요" />
+    <section id="apply" className="apply-sec" ref={sectionRef}>
+      <div className="apply-inner">
+        <div className="apply-left">
+          <span
+            className="tag tag--capture"
+            onClick={capture}
+            role="button"
+            tabIndex={0}
+          >
+            Step 08 · Apply
+          </span>
+          <h2 className="apply-title">
+            사전체험단 신청하기
+            <br />
+          </h2>
+          <p className="apply-desc">
+            30만 원 상당의 감정 코칭 프로그램을
+            <br />
+            사전 체험단에게 무료로 제공합니다.
+          </p>
+          <div className="apply-points">
+            <div className="apply-point">
+              <span className="apply-point-icon">✦</span>
+              <span>1:1 전문 코칭 세션</span>
+            </div>
+            <div className="apply-point">
+              <span className="apply-point-icon">✦</span>
+              <span>감정 패턴 분석 리포트</span>
+            </div>
+            <div className="apply-point">
+              <span className="apply-point-icon">✦</span>
+              <span>맞춤 회복 루틴 설계</span>
+            </div>
           </div>
-          <div className="fg">
-            <label className="fl">생년월일 (나이)</label>
-            <input type="text" name="birthDate" value={fd.birthDate} onChange={set} required className="fi" placeholder="예: 1995-03-15 (30세)" />
-          </div>
-          <div className="fg">
-            <label className="fl">직업</label>
-            <input type="text" name="job" value={fd.job} onChange={set} required className="fi" placeholder="직업을 입력하세요" />
-          </div>
-          <div className="fg">
-            <label className="fl">연락처</label>
-            <input type="tel" name="phone" value={fd.phone} onChange={set} required className="fi" placeholder="010-0000-0000" />
-          </div>
-          <div className="fg fg--wide">
-            <label className="fl">현재 가장 고민되는 감정</label>
-            <textarea name="concern" value={fd.concern} onChange={set} required className="fi fi--ta" placeholder="어떤 감정으로 고민하고 있나요?" />
-          </div>
-          <div className="fg fg--wide">
-            <label className="fl">참여 가능 여부 / 가능 시간</label>
-            <input type="text" name="available" value={fd.available} onChange={set} required className="fi" placeholder="예: 주말 저녁 가능" />
-          </div>
-          <button type="submit" className="form-submit">나의 감정 패턴 분석 신청하기 →</button>
-        </form>
+        </div>
+
+        <div className="apply-right">
+          <form className="apply-form" onSubmit={submit}>
+            <div className="af-row">
+              <div className="af-group">
+                <label className="af-label">이름</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={fd.name}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="홍길동"
+                />
+              </div>
+              <div className="af-group">
+                <label className="af-label">생년월일 (나이)</label>
+                <input
+                  type="text"
+                  name="birthDate"
+                  value={fd.birthDate}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="1995-03-15 (30세)"
+                />
+              </div>
+            </div>
+            <div className="af-row">
+              <div className="af-group">
+                <label className="af-label">직업</label>
+                <input
+                  type="text"
+                  name="job"
+                  value={fd.job}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="대학생, 직장인 등"
+                />
+              </div>
+              <div className="af-group">
+                <label className="af-label">연락처</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={fd.phone}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="010-0000-0000"
+                />
+              </div>
+            </div>
+            <div className="af-row">
+              <div className="af-group">
+                <label className="af-label">MBTI</label>
+                <input
+                  type="text"
+                  name="mbti"
+                  value={fd.mbti}
+                  onChange={set}
+                  className="af-input"
+                  placeholder="예: INFP"
+                />
+              </div>
+              <div className="af-group">
+                <label className="af-label">
+                  거주지 (동까지만, 또는 근처 역)
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  value={fd.location}
+                  onChange={set}
+                  className="af-input"
+                  placeholder="예: 성수동 / 건대입구역"
+                />
+              </div>
+            </div>
+            <div className="af-group">
+              <label className="af-label">
+                참여 가능 시간 (평일, 20시까지)
+              </label>
+              <input
+                type="text"
+                name="available"
+                value={fd.available}
+                onChange={set}
+                required
+                className="af-input"
+                placeholder="예: 평일 오후 2시~6시"
+              />
+            </div>
+            <div className="af-group">
+              <label className="af-label">현재 가장 고민되는 감정</label>
+              <textarea
+                name="concern"
+                value={fd.concern}
+                onChange={set}
+                required
+                className="af-input af-textarea"
+                placeholder="어떤 감정으로 고민하고 있나요?"
+              />
+            </div>
+            <button type="submit" className="af-submit">
+              신청하기 <span className="af-arrow">→</span>
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
@@ -820,16 +1208,98 @@ function ApplyForm() {
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer id="contact" className="footer">
       <div className="footer-inner">
-        <img src="/assets/fillmore-studio-logo.png" alt="Fillmore Studio" className="footer-logo" />
-        <p className="footer-copy">© 2026 필모어 스튜디오 · Fillconomy. All rights reserved.</p>
+        <p className="footer-copy">
+          © 2026 필모어 스튜디오 · Fillconomy. All rights reserved.
+        </p>
         <div className="footer-links">
-          <a href="https://www.instagram.com/fillmore__studio?utm_source=qr" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a>
-          <span className="footer-dot">·</span>
-          <a href="https://blog.naver.com/fillmore_studio" target="_blank" rel="noopener noreferrer" className="footer-link">Blog</a>
-          <span className="footer-dot">·</span>
-          <a href="https://moaform.com/q/Ygg1dz" target="_blank" rel="noopener noreferrer" className="footer-link">Moaform</a>
+          <a
+            href="https://www.instagram.com/fillmore__studio?utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            <svg
+              className="footer-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+            Instagram
+          </a>
+          <a
+            href="https://blog.naver.com/fillmore_studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            <svg
+              className="footer-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <circle cx="12" cy="12" r="12" />
+              <text
+                x="12"
+                y="16.5"
+                textAnchor="middle"
+                fill="#fff"
+                fontSize="11"
+                fontWeight="700"
+                fontFamily="Arial, sans-serif"
+              >
+                N
+              </text>
+            </svg>
+            Blog
+          </a>
+          <a
+            href="https://moaform.com/q/Ygg1dz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            <svg
+              className="footer-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <rect x="2" y="3" width="20" height="18" rx="3" ry="3" />
+              <path
+                d="M7 8h10M7 12h7M7 16h4"
+                stroke="#fff"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                fill="none"
+              />
+            </svg>
+            moaForm
+          </a>
+          <button
+            className="footer-link footer-mail-btn"
+            onClick={() => {
+              navigator.clipboard.writeText("fillmore_studio@naver.com");
+              alert("메일 주소가 복사되었습니다!\nfillmore_studio@naver.com");
+            }}
+          >
+            <svg
+              className="footer-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="3" ry="3" />
+              <path
+                d="M2 7l10 7 10-7"
+                stroke="#fff"
+                strokeWidth="1.8"
+                fill="none"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Mail
+          </button>
         </div>
       </div>
     </footer>
@@ -850,7 +1320,7 @@ export default function FeelComponents() {
       <BetaProgram />
       <Benefits />
       <RealStories />
-      <WhyTrust />
+
       <ApplyForm />
       <Footer />
     </div>

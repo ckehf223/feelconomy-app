@@ -1325,7 +1325,7 @@
   font-style: italic;
 }
 .f-eco {
-  color: #7b6fa2;
+  color: #eb54a0;
   font-style: italic;
 }
 .f-op {
@@ -2214,7 +2214,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #FFF8F2;
+  background: #fff8f2;
   z-index: 99999;
   display: flex;
   flex-direction: column;

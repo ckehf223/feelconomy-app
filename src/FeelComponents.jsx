@@ -970,23 +970,6 @@ function Benefits() {
             </div>
           ))}
         </div>
-
-        <div className="goods-section">
-          <h3 className="goods-heading">
-            🎁 참여자 전원에게 <span className="accent">감정 굿즈</span>를
-            드려요
-          </h3>
-          <p className="goods-sub">아래 3가지 중 1가지를 선택할 수 있어요.</p>
-          <div className="goods-grid">
-            {GOODS_OPTIONS.map((g, i) => (
-              <div key={i} className="goods-card">
-                <img src={g.image} alt={g.name} className="goods-img" />
-                <strong className="goods-name">{g.name}</strong>
-                <span className="goods-desc">{g.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -29,16 +29,7 @@ const EMOTIONS = [
   },
 ];
 
-const PRODUCTS = [
-  { name: "왁뿌볼", image: "/assets/wakppubol.jpg" },
-  { name: "슬라임", image: "/assets/slime.jpg" },
-  { name: "AI 상담", image: "/assets/ai-counseling.jpg" },
-  { name: "키캡", image: "/assets/keycaps.jpg" },
-  { name: "향초", image: "/assets/candle.jpg" },
-  { name: "디퓨저", image: "/assets/diffuser.jpg" },
-  { name: "힐링 콘텐츠", image: "/assets/healing-content.jpg" },
-  { name: "ASMR", image: "/assets/asmr.jpg" },
-];
+const PRODUCTS = ["왁뿌볼 / 슬라임", "AI 상담", "캔들 / 디퓨저", "음식"];
 
 const PHASES = [
   {
@@ -733,6 +724,14 @@ function EmotionCheck() {
 }
 
 function Feelconomy() {
+  const [selected, setSelected] = useState([]);
+
+  const toggle = (p) => {
+    setSelected((prev) =>
+      prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p],
+    );
+  };
+
   return (
     <section id="feelconomy" className="sec">
       <div className="sec-inner">
@@ -743,12 +742,22 @@ function Feelconomy() {
           소비합니다.
         </h2>
 
-        <div className="prod-grid">
+        <div className="prod-poster">
+          <img
+            src="/assets/feelconomy-poster.jpg"
+            alt="Feelconomy"
+            className="prod-poster-img"
+          />
+        </div>
+        <div className="prod-tags">
           {PRODUCTS.map((p) => (
-            <figure key={p.name} className="prod-card">
-              <img src={p.image} alt={p.name} className="prod-img" />
-              <figcaption className="prod-name">{p.name}</figcaption>
-            </figure>
+            <button
+              key={p}
+              className={`prod-tag ${selected.includes(p) ? "prod-tag--on" : ""}`}
+              onClick={() => toggle(p)}
+            >
+              {p}
+            </button>
           ))}
         </div>
 
@@ -1080,16 +1089,40 @@ function ApplyForm() {
             <div className="af-row af-row--3">
               <div className="af-group">
                 <label className="af-label">이름</label>
-                <input type="text" name="name" value={fd.name} onChange={set} required className="af-input" placeholder="홍길동" />
+                <input
+                  type="text"
+                  name="name"
+                  value={fd.name}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="홍길동"
+                />
               </div>
               <div className="af-group">
                 <label className="af-label">생년월일</label>
-                <input type="text" name="birthDate" value={fd.birthDate} onChange={set} required className="af-input" placeholder="1995-03-15 (30세)" />
+                <input
+                  type="text"
+                  name="birthDate"
+                  value={fd.birthDate}
+                  onChange={set}
+                  required
+                  className="af-input"
+                  placeholder="1995-03-15 (30세)"
+                />
               </div>
               <div className="af-group">
                 <label className="af-label">성별</label>
-                <select name="gender" value={fd.gender} onChange={set} required className="af-input af-select">
-                  <option value="" disabled>선택</option>
+                <select
+                  name="gender"
+                  value={fd.gender}
+                  onChange={set}
+                  required
+                  className="af-input af-select"
+                >
+                  <option value="" disabled>
+                    선택
+                  </option>
                   <option value="남성">남성</option>
                   <option value="여성">여성</option>
                 </select>
@@ -1288,8 +1321,8 @@ export default function FeelComponents() {
       <Navigation />
       <Hero />
       <JourneyStrip />
-      <AboutStudio />
       <EmotionCheck />
+      <AboutStudio />
       <Feelconomy />
       <Problem />
       <Solution />

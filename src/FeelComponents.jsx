@@ -1010,6 +1010,7 @@ function ApplyForm() {
   const [fd, setFd] = useState({
     name: "",
     birthDate: "",
+    gender: "",
     job: "",
     phone: "",
     mbti: "",
@@ -1076,35 +1077,27 @@ function ApplyForm() {
 
         <div className="apply-right">
           <form className="apply-form" onSubmit={submit}>
-            <div className="af-row">
+            <div className="af-row af-row--3">
               <div className="af-group">
                 <label className="af-label">이름</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={fd.name}
-                  onChange={set}
-                  required
-                  className="af-input"
-                  placeholder="홍길동"
-                />
+                <input type="text" name="name" value={fd.name} onChange={set} required className="af-input" placeholder="홍길동" />
               </div>
               <div className="af-group">
-                <label className="af-label">생년월일 (나이)</label>
-                <input
-                  type="text"
-                  name="birthDate"
-                  value={fd.birthDate}
-                  onChange={set}
-                  required
-                  className="af-input"
-                  placeholder="1995-03-15 (30세)"
-                />
+                <label className="af-label">생년월일</label>
+                <input type="text" name="birthDate" value={fd.birthDate} onChange={set} required className="af-input" placeholder="1995-03-15 (30세)" />
+              </div>
+              <div className="af-group">
+                <label className="af-label">성별</label>
+                <select name="gender" value={fd.gender} onChange={set} required className="af-input af-select">
+                  <option value="" disabled>선택</option>
+                  <option value="남성">남성</option>
+                  <option value="여성">여성</option>
+                </select>
               </div>
             </div>
             <div className="af-row">
               <div className="af-group">
-                <label className="af-label">직업</label>
+                <label className="af-label">직업/전공</label>
                 <input
                   type="text"
                   name="job"
@@ -1112,7 +1105,7 @@ function ApplyForm() {
                   onChange={set}
                   required
                   className="af-input"
-                  placeholder="대학생, 직장인 등"
+                  placeholder="대학생(경영과),  직장인 등"
                 />
               </div>
               <div className="af-group">

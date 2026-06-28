@@ -1180,6 +1180,9 @@ function ApplyForm() {
     const { name, value } = e.target;
     setFd((p) => ({ ...p, [name]: value }));
   };
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
+
   const submit = (e) => {
     e.preventDefault();
     const entry = {
@@ -1194,7 +1197,8 @@ function ApplyForm() {
     const filtered = prev.filter((d) => Date.now() - d.timestamp < sevenDays);
     const updated = [entry, ...filtered].slice(0, 100);
     localStorage.setItem("fillmore_applications", JSON.stringify(updated));
-    alert(`신청 완료!\n이름: ${fd.name}\n연락처: ${fd.phone}`);
+    setSubmittedName(fd.name);
+    setShowConfirm(true);
   };
   const capture = async () => {
     if (!sectionRef.current) return;
@@ -1372,6 +1376,37 @@ function ApplyForm() {
           </form>
         </div>
       </div>
+
+      {showConfirm && (
+        <div className="confirm-overlay" onClick={() => setShowConfirm(false)}>
+          <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="confirm-icon">✦</div>
+            <h3 className="confirm-title">{submittedName}님, 감사합니다.</h3>
+            <p className="confirm-body">
+              <strong>Fillmore Studio </strong>
+              감정 코칭 체험단
+              <br />
+              정상적으로 신청되었습니다.
+            </p>
+            <p className="confirm-body">
+              담당 팀에서 신청 내용을 확인한 후,
+              <br />
+              <strong>0 ~ 3일 이내</strong>에 안내드릴 예정입니다.
+            </p>
+            <p className="confirm-note">
+              더 나은 나를 향한 여정,
+              <br />
+              필모어 스튜디오가 함께하겠습니다.
+            </p>
+            <button
+              className="confirm-close"
+              onClick={() => setShowConfirm(false)}
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -1385,7 +1420,15 @@ function getRecords() {
 }
 
 function ClearAndAdmin({ showList, setShowList }) {
+  const [guide, setGuide] = useState(
+    () => localStorage.getItem("fillmore_guide") || "",
+  );
   const records = showList ? getRecords() : [];
+
+  const saveGuide = () => {
+    localStorage.setItem("fillmore_guide", guide);
+    alert("인도자가 저장되었습니다.");
+  };
 
   return (
     <div className="clear-section">
@@ -1400,7 +1443,30 @@ function ClearAndAdmin({ showList, setShowList }) {
       </button>
       {showList && (
         <div className="admin-list">
-          <h4 className="admin-title">최근 신청 내역 ({records.length}건)</h4>
+          <div className="admin-header">
+            <h4 className="admin-title">
+              최근 신청 내역 ({records.length}건){" "}
+              <button
+                className="admin-close-top"
+                onClick={() => setShowList(false)}
+              >
+                닫기
+              </button>
+            </h4>
+            <div className="admin-guide">
+              <label className="admin-guide-label">인도자 :</label>
+              <input
+                className="admin-guide-input"
+                type="text"
+                value={guide}
+                onChange={(e) => setGuide(e.target.value)}
+                placeholder="이름 입력"
+              />
+              <button className="admin-guide-save" onClick={saveGuide}>
+                저장
+              </button>
+            </div>
+          </div>
           {records.length === 0 ? (
             <p className="admin-empty">저장된 신청 내역이 없습니다.</p>
           ) : (
@@ -1418,6 +1484,39 @@ function ClearAndAdmin({ showList, setShowList }) {
                 </p>
                 <p>고민: {d.concern}</p>
                 <p>참여시간: {d.available}</p>
+                {(() => {
+                  const savedGuide =
+                    localStorage.getItem("fillmore_guide") || "";
+                  const summary = `${d.timestamp ? `${new Date(d.timestamp).getMonth() + 1}/${new Date(d.timestamp).getDate()}` : "-"}-신규-${d.name}-${d.phone}-${d.gender === "남성" ? "남" : d.gender === "여성" ? "여" : d.gender}-${d.birthDate}-${d.location}-필코노미-${savedGuide}-비오픈`;
+                  return (
+                    <div className="admin-summary-row">
+                      <p className="admin-summary">{summary}</p>
+                      <button
+                        className="admin-copy"
+                        onClick={(e) => {
+                          navigator.clipboard.writeText(summary);
+                          const btn = e.currentTarget;
+                          btn.dataset.copied = "true";
+                          setTimeout(() => (btn.dataset.copied = ""), 1500);
+                        }}
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect x="9" y="9" width="13" height="13" rx="2" />
+                          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                        </svg>
+                      </button>
+                    </div>
+                  );
+                })()}
               </div>
             ))
           )}
@@ -1503,9 +1602,11 @@ function Footer({ onAdminTap }) {
           </a>
           <button
             className="footer-link footer-mail-btn"
-            onClick={() => {
+            onClick={(e) => {
               navigator.clipboard.writeText("fillmore_studio@naver.com");
-              alert("메일 주소가 복사되었습니다!\nfillmore_studio@naver.com");
+              const el = e.currentTarget;
+              el.dataset.copied = "true";
+              setTimeout(() => (el.dataset.copied = ""), 1500);
             }}
           >
             <svg

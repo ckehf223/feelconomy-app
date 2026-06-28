@@ -264,32 +264,32 @@ const JOURNEY_STEPS = [
   {
     title: "Understand",
     desc: "나의 감정과 패턴을 깊이 이해해요.",
-    character: { color: "#FFD060", eyes: "oo", shape: "flower" },
+    icon: "/assets/char-flower.svg",
   },
   {
     title: "Connect",
     desc: "흩어진 감정과 생각을 연결해요.",
-    character: { color: "#5BAE7A", eyes: "^^", shape: "ghost" },
+    icon: "/assets/char-cloud-green.svg",
   },
   {
     title: "Fill",
     desc: "필요한 영양을 채워 균형을 찾아요.",
-    character: { color: "#F5A0B0", eyes: ":)", shape: "blob" },
+    icon: "/assets/char-cloud-blue.svg",
   },
   {
     title: "Grow",
     desc: "더 단단하고 빛나는 나로 성장해요.",
-    character: { color: "#9B7ED8", eyes: "^^", shape: "ghost" },
+    icon: "/assets/char-star.svg",
   },
   {
     title: "Become",
     desc: "완성된 나답게 살아가요.",
-    character: { color: "#FFD060", eyes: ":)", shape: "blob" },
+    icon: "/assets/char-heart.svg",
   },
 ];
 
 function CharacterSvg({ color, eyes, shape, size = 40 }) {
-  const eyeY = shape === "flower" ? 16 : 18;
+  const eyeY = shape === "flower" ? 16 : shape === "cloud" ? 17 : shape === "star" ? 14 : shape === "heart" ? 13 : 18;
   const eyeContent =
     eyes === "oo" ? (
       <>
@@ -324,7 +324,7 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
       </>
     );
 
-  const mouthY = shape === "flower" ? 22 : 25;
+  const mouthY = shape === "flower" ? 22 : shape === "cloud" ? 22 : shape === "star" ? 19 : shape === "heart" ? 18 : 25;
   const mouth =
     eyes === ":)" ? (
       <path
@@ -354,19 +354,37 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
       />
     ) : shape === "flower" ? (
       <>
-        <circle cx="20" cy="7" r="8" fill={color} opacity="0.6" />
-        <circle cx="11" cy="14" r="8" fill={color} opacity="0.6" />
-        <circle cx="29" cy="14" r="8" fill={color} opacity="0.6" />
-        <circle cx="13" cy="24" r="8" fill={color} opacity="0.6" />
-        <circle cx="27" cy="24" r="8" fill={color} opacity="0.6" />
-        <circle cx="20" cy="17" r="11" fill={color} />
+        <ellipse cx="20" cy="6" r="7.5" fill={color} />
+        <ellipse cx="9" cy="13" r="7.5" fill={color} />
+        <ellipse cx="31" cy="13" r="7.5" fill={color} />
+        <ellipse cx="11" cy="25" r="7.5" fill={color} />
+        <ellipse cx="29" cy="25" r="7.5" fill={color} />
+        <circle cx="20" cy="17" r="10" fill={color} />
       </>
+    ) : shape === "cloud" ? (
+      <path
+        d="M12 28 C5 28 3 22 5 18 C3 14 6 9 12 9 C14 5 19 3 24 5 C28 3 34 6 34 12 C38 14 38 22 33 25 C34 28 30 30 26 28 C23 30 17 30 12 28 Z"
+        fill={color}
+      />
+    ) : shape === "star" ? (
+      <path
+        d="M20 3 C21 8 24 11 28 11 C24 13 22 17 22 22 C20 18 17 16 12 15 C16 13 19 9 20 3 Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+    ) : shape === "heart" ? (
+      <path
+        d="M20 28 C12 22 4 17 4 11 C4 6 8 3 12 3 C15 3 18 5 20 8 C22 5 25 3 28 3 C32 3 36 6 36 11 C36 17 28 22 20 28 Z"
+        fill={color}
+      />
     ) : (
       <ellipse cx="20" cy="19" rx="16" ry="15" fill={color} />
     );
 
   return (
-    <svg width={size} height={size} viewBox="0 0 40 34" fill="none">
+    <svg width={size} height={size} viewBox={shape === "heart" ? "0 0 40 32" : "0 0 40 34"} fill="none">
       {shapePath}
       {eyeContent}
       {mouth}
@@ -546,12 +564,7 @@ function JourneyStrip() {
         {JOURNEY_STEPS.map((step, idx) => (
           <div key={idx} className="strip-item">
             <div className="strip-char">
-              <CharacterSvg
-                color={step.character.color}
-                eyes={step.character.eyes}
-                shape={step.character.shape}
-                size={48}
-              />
+              <img src={step.icon} alt={step.title} className="strip-char-img" />
             </div>
             <div className="strip-text">
               <strong className="strip-title">{step.title}</strong>

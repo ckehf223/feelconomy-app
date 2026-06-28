@@ -284,12 +284,12 @@
 
 .float-char--5 {
   top: 50%;
-  left: 14%;
+  left: 10%;
   animation: floatBob2 6.5s ease-in-out infinite 3s;
 }
 
 .float-char--6 {
-  top: 8%;
+  top: 10%;
   left: 44%;
   animation: floatBob3 7.5s ease-in-out infinite 1.5s;
 }
@@ -301,8 +301,8 @@
 }
 
 .float-char--8 {
-  bottom: 40%;
-  left: 32%;
+  bottom: 47%;
+  left: 37%;
   animation: floatBob2 9s ease-in-out infinite 4s;
   opacity: 0.6;
 }
@@ -351,7 +351,7 @@
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.4fr;
   align-items: center;
   gap: 2rem;
   position: relative;
@@ -382,15 +382,19 @@
 
 .hero-title-line {
   display: block;
-  font-family:
-    "Pretendard",
-    -apple-system,
-    sans-serif;
-  font-size: clamp(2.2rem, 5.2vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
+  font-family: "Libre Bodoni", "Bodoni Moda", "Didot", Georgia, serif;
+  font-size: clamp(5rem, 13vw, 12rem);
+  font-weight: 400;
+  line-height: 0.9;
   color: #1a1a1a;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
+  transform: scaleY(1.12) scaleX(0.92);
+  transform-origin: left top;
+}
+
+.hero-title-line em {
+  font-style: italic;
+  font-weight: 400;
 }
 
 .hero-sub {
@@ -459,12 +463,54 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: visible;
+}
+
+.puzzle-label {
+  position: absolute;
+  font-family: "Libre Bodoni", Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #1a1a1a;
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.puzzle-arrow {
+  width: 32px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.puzzle-label--1 {
+  top: 12%;
+  left: -14%;
+}
+.puzzle-label--2 {
+  top: 2%;
+  right: -10%;
+}
+.puzzle-label--3 {
+  bottom: 12%;
+  left: -12%;
+}
+.puzzle-label--4 {
+  bottom: 28%;
+  right: -16%;
+}
+.puzzle-label--5 {
+  bottom: 8%;
+  right: -4%;
 }
 
 .puzzle-head-img {
-  width: 115%;
-  max-width: 720px;
-  height: auto;
+  width: 130%;
+  max-width: 820px;
+  height: 580px;
   object-fit: contain;
   user-select: none;
   pointer-events: none;
@@ -2338,6 +2384,15 @@
 
   .puzzle-head-img {
     width: 100%;
+    height: auto;
+  }
+
+  .puzzle-label {
+    font-size: 0.65rem;
+  }
+  .puzzle-arrow {
+    width: 22px;
+    height: 16px;
   }
 
   .float-char {
@@ -2519,7 +2574,8 @@
   }
 
   .hero-title-line {
-    font-size: 1.9rem;
+    font-size: clamp(3rem, 14vw, 5rem);
+    font-weight: 700;
   }
   .hero-eyebrow {
     font-size: 0.65rem;

@@ -505,9 +505,12 @@ function Hero() {
         <div className="hero-text">
           <p className="hero-eyebrow">EMOTIONS CONNECT. WE FILL.</p>
           <h1 className="hero-title">
-            <span className="hero-title-line">PUT THE PIECES</span>
-            <span className="hero-title-line">TOGETHER,</span>
-            <span className="hero-title-line">BECOME YOU.</span>
+            <span className="hero-title-line">
+              W<em></em>hat's
+            </span>
+            <span className="hero-title-line">
+              M<em></em>issing?
+            </span>
           </h1>
           <p className="hero-sub">
             흩어져 있던 감정의 조각들,

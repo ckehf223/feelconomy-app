@@ -1,30 +1,55 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import html2canvas from "html2canvas";
+import {
+  Sun,
+  Cloud,
+  CloudRain,
+  Zap,
+  Brain,
+  Repeat2,
+  ClipboardList,
+  Mic,
+  BarChart3,
+  MessageSquare,
+  Home,
+  Sparkles,
+  GraduationCap,
+  AlertTriangle,
+  EyeOff,
+  HeartCrack,
+  Flame,
+  CloudOff,
+  Rainbow,
+} from "lucide-react";
 import "./FeelComponents.css";
 
 const EMOTIONS = [
   {
-    emoji: "☀️",
+    Icon: Sun,
     label: "햇살",
     color: "#FFF3D6",
+    iconColor: "#E8A030",
     message: "오늘은 맑은 하루네요! 이 에너지를 잘 활용해보세요.",
   },
   {
-    emoji: "☁️",
+    Icon: Cloud,
     label: "구름",
     color: "#EDE5D8",
+    iconColor: "#999",
     message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.",
   },
   {
-    emoji: "🌧️",
+    Icon: CloudRain,
     label: "비",
     color: "#D4DEE8",
+    iconColor: "#6B8DB5",
     message: "비 오는 날엔 잠시 쉬어가도 괜찮아요. 당신의 감정은 소중해요.",
   },
   {
-    emoji: "⚡",
+    Icon: Zap,
     label: "번개",
     color: "#E8D4E8",
+    iconColor: "#9B7ED8",
     message: "감정이 격하게 요동치는 날이네요. 깊은 숨 한번 쉬어볼까요?",
   },
 ];
@@ -109,52 +134,34 @@ const TESTIMONIALS = [
 
 const BENEFITS = [
   {
-    icon: "🧠",
+    Icon: Brain,
     title: "감정 구조 리포트",
     desc: "나의 감정이 어떤 구조로 작동하는지 시각화된 분석 결과를 받아요.",
   },
   {
-    icon: "🔁",
+    Icon: Repeat2,
     title: "반복 패턴 진단",
     desc: "인간관계·연애·스트레스에서 반복되는 나만의 패턴을 정확히 짚어드려요.",
   },
   {
-    icon: "📋",
+    Icon: ClipboardList,
     title: "맞춤 회복 루틴표",
     desc: "내 성격과 환경에 맞는 구체적인 회복 전략을 문서로 제공해요.",
   },
   {
-    icon: "🗣️",
+    Icon: Mic,
     title: "1:1 전문 코칭 2회",
     desc: "전문 코치와 함께 감정 패턴을 분석하고 방향을 설계하는 깊은 대화.",
   },
   {
-    icon: "📊",
+    Icon: BarChart3,
     title: "변화 추적 시트",
     desc: "프로그램 전후 감정 변화를 직접 비교할 수 있는 셀프 체크 도구.",
   },
   {
-    icon: "💬",
+    Icon: MessageSquare,
     title: "사후 피드백 1회",
     desc: "프로그램 종료 2주 후, 변화가 유지되고 있는지 점검하는 팔로업 세션.",
-  },
-];
-
-const GOODS_OPTIONS = [
-  {
-    name: "키캡",
-    desc: "감정을 담은 아트 키캡",
-    image: "/assets/goods-keycap.png",
-  },
-  {
-    name: "왁뿌볼",
-    desc: "말랑말랑 스트레스 해소",
-    image: "/assets/goods-ball.png",
-  },
-  {
-    name: "슬라임",
-    desc: "촉감으로 느끼는 안정감",
-    image: "/assets/goods-slime.png",
   },
 ];
 
@@ -182,28 +189,28 @@ const ABOUT_CARDS = [
     label: "SEONGSU, 2026",
     title: "성수 팝업",
     desc: "감정을 직접 만지고 경험하는 오프라인 공간",
-    icon: "🏠",
+    Icon: Home,
     color: "#F5B8C4",
   },
   {
     label: "BRANDING STUDIO",
     title: "브랜딩 컨설팅",
     desc: "브랜드의 빈 부분을 채우는 전략 설계",
-    icon: "✦",
+    Icon: Sparkles,
     color: "#D6D48C",
   },
   {
     label: "EMOTION DATA",
     title: "감정 데이터",
     desc: "실제 참여자 기반의 감정 패턴 분석",
-    icon: "📊",
+    Icon: BarChart3,
     color: "#8CBEE0",
   },
   {
     label: "LONG-TERM GOAL",
     title: "Wee클래스 보급",
     desc: "학교 현장으로 확장하는 정서지원 모델",
-    icon: "🎓",
+    Icon: GraduationCap,
     color: "#E8A88C",
   },
 ];
@@ -211,25 +218,25 @@ const ABOUT_CARDS = [
 const LOOP_ITEMS = [
   {
     label: "불안",
-    icon: "😰",
+    Icon: AlertTriangle,
     color: "#E8A88C",
     detail: "무언가 잘못될 것 같은 막연한 두려움이 반복됩니다.",
   },
   {
     label: "회피",
-    icon: "🙈",
+    Icon: EyeOff,
     color: "#D6D48C",
     detail: "불편한 감정을 마주하지 않고 자꾸 뒤로 미루게 됩니다.",
   },
   {
     label: "후회",
-    icon: "😔",
+    Icon: HeartCrack,
     color: "#8CBEE0",
     detail: "왜 그때 그렇게 했을까, 같은 생각이 머릿속을 맴돕니다.",
   },
   {
     label: "스트레스",
-    icon: "🤯",
+    Icon: Flame,
     color: "#F5B8C4",
     detail: "쌓이고 쌓여 결국 몸과 마음이 함께 무너지는 순간이 옵니다.",
   },
@@ -289,7 +296,16 @@ const JOURNEY_STEPS = [
 ];
 
 function CharacterSvg({ color, eyes, shape, size = 40 }) {
-  const eyeY = shape === "flower" ? 16 : shape === "cloud" ? 17 : shape === "star" ? 14 : shape === "heart" ? 13 : 18;
+  const eyeY =
+    shape === "flower"
+      ? 16
+      : shape === "cloud"
+        ? 17
+        : shape === "star"
+          ? 14
+          : shape === "heart"
+            ? 13
+            : 18;
   const eyeContent =
     eyes === "oo" ? (
       <>
@@ -324,7 +340,16 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
       </>
     );
 
-  const mouthY = shape === "flower" ? 22 : shape === "cloud" ? 22 : shape === "star" ? 19 : shape === "heart" ? 18 : 25;
+  const mouthY =
+    shape === "flower"
+      ? 22
+      : shape === "cloud"
+        ? 22
+        : shape === "star"
+          ? 19
+          : shape === "heart"
+            ? 18
+            : 25;
   const mouth =
     eyes === ":)" ? (
       <path
@@ -384,7 +409,12 @@ function CharacterSvg({ color, eyes, shape, size = 40 }) {
     );
 
   return (
-    <svg width={size} height={size} viewBox={shape === "heart" ? "0 0 40 32" : "0 0 40 34"} fill="none">
+    <svg
+      width={size}
+      height={size}
+      viewBox={shape === "heart" ? "0 0 40 32" : "0 0 40 34"}
+      fill="none"
+    >
       {shapePath}
       {eyeContent}
       {mouth}
@@ -564,7 +594,11 @@ function JourneyStrip() {
         {JOURNEY_STEPS.map((step, idx) => (
           <div key={idx} className="strip-item">
             <div className="strip-char">
-              <img src={step.icon} alt={step.title} className="strip-char-img" />
+              <img
+                src={step.icon}
+                alt={step.title}
+                className="strip-char-img"
+              />
             </div>
             <div className="strip-text">
               <strong className="strip-title">{step.title}</strong>
@@ -605,7 +639,9 @@ function AboutStudio() {
             >
               <div className="about-card-head">
                 <span className="about-card-tag">{card.label}</span>
-                <span className="about-card-icon">{card.icon}</span>
+                <span className="about-card-icon">
+                  <card.Icon size={22} strokeWidth={1.5} />
+                </span>
               </div>
               <div className="about-card-foot">
                 <span className="about-card-title">{card.title}</span>
@@ -700,7 +736,7 @@ function EmotionCheck() {
       {selected && <WeatherOverlay type={selected} animKey={animKey} />}
 
       <div className="sec-inner emo-content">
-        <span className="tag">Step 01 · Emotion Check</span>
+        <span className="tag">Begin · Emotion Check</span>
         <h2 className="sec-title">
           오늘 기분, <span className="accent">날씨</span>로 표현하면
           <br />
@@ -718,7 +754,9 @@ function EmotionCheck() {
               style={{ backgroundColor: em.color }}
               onClick={() => handleSelect(em)}
             >
-              <span className="emo-icon">{em.emoji}</span>
+              <span className="emo-icon">
+                <em.Icon size={48} color={em.iconColor} strokeWidth={1.5} />
+              </span>
               <span className="emo-name">{em.label}</span>
             </button>
           ))}
@@ -728,7 +766,7 @@ function EmotionCheck() {
           {cur && (
             <>
               <div className="emo-result-icon" key={animKey}>
-                {cur.emoji}
+                <cur.Icon size={42} color={cur.iconColor} strokeWidth={1.5} />
               </div>
               <p className="emo-result-msg">{cur.message}</p>
             </>
@@ -751,7 +789,7 @@ function Feelconomy() {
   return (
     <section id="feelconomy" className="sec">
       <div className="sec-inner">
-        <span className="tag">Step 02 · What is Feelconomy?</span>
+        <span className="tag">Step 01 · What is Feelconomy?</span>
         <h2 className="sec-title">
           우리는 <span className="accent">기분</span>을 위해
           <br />
@@ -804,33 +842,92 @@ function Problem() {
   return (
     <section className="sec sec--dark">
       <div className="sec-inner">
-        <span className="tag tag--light">Step 03 · The Problem</span>
+        <span className="tag tag--light">Step 02 · The Problem</span>
         <h2 className="sec-title sec-title--light">
           왜 우리는 자꾸
           <br />
           <span className="accent">같은 감정</span>에 반복적으로 흔들릴까요?
         </h2>
 
-        <div className="loop-row">
+        <div className="loop-circle">
+          <svg className="loop-arrows" viewBox="0 0 400 400">
+            <path
+              d="M248 68 A155 155 0 0 1 330 150"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2"
+            />
+            <path
+              d="M325 145 L335 158 L320 153"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+
+            <path
+              d="M338 248 A155 155 0 0 1 248 335"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2"
+            />
+            <path
+              d="M253 330 L243 342 L240 327"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+
+            <path
+              d="M152 338 A155 155 0 0 1 68 250"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2"
+            />
+            <path
+              d="M73 255 L63 242 L78 246"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+
+            <path
+              d="M62 155 A155 155 0 0 1 155 65"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2"
+            />
+            <path
+              d="M150 70 L160 57 L163 72"
+              fill="none"
+              stroke="#c4a0d8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
           {LOOP_ITEMS.map((it, i) => (
-            <div key={i} className="loop-node">
-              <button
-                className={`loop-btn ${active === i ? "loop-btn--on" : ""}`}
-                style={{ backgroundColor: it.color }}
-                onClick={() => setActive((c) => (c === i ? null : i))}
-              >
-                <span className="loop-icon">{it.icon}</span>
-                <span className="loop-name">{it.label}</span>
-              </button>
-              {i < LOOP_ITEMS.length - 1 && (
-                <span className="loop-arrow">→</span>
-              )}
-            </div>
+            <button
+              key={i}
+              className={`loop-btn loop-pos--${i} ${active === i ? "loop-btn--on" : ""}`}
+              style={{ backgroundColor: it.color }}
+              onClick={() => setActive((c) => (c === i ? null : i))}
+            >
+              <span className="loop-icon">
+                <it.Icon size={28} strokeWidth={1.5} color="#333" />
+              </span>
+              <span className="loop-name">{it.label}</span>
+            </button>
           ))}
-          <div className="loop-back">
-            <span className="loop-spin">↺</span>
-            <span>반복되는 감정 루프</span>
-          </div>
+        </div>
+        <div className="loop-back">
+          <span className="loop-spin">↺</span>
+          <span>반복되는 감정 루프</span>
         </div>
 
         <div
@@ -864,7 +961,7 @@ function Solution() {
   return (
     <section id="solution" className="sec sec--alt">
       <div className="sec-inner">
-        <span className="tag">Step 04 · Our Solution</span>
+        <span className="tag">Step 03 · Our Solution</span>
         <h2 className="sec-title">
           일시적인 진통제가 아닌,
           <br />
@@ -925,7 +1022,7 @@ function BetaProgram() {
   return (
     <section id="beta" className="sec">
       <div className="sec-inner">
-        <span className="tag">Step 05 · Beta Program</span>
+        <span className="tag">Step 04 · Beta Program</span>
         <h2 className="sec-title">
           현재 <span className="accent">베타 체험단</span> 모집 중
         </h2>
@@ -953,7 +1050,9 @@ function BetaProgram() {
               <br />
               모르겠음."
             </p>
-            <span className="ba-emoji">😶‍🌫️</span>
+            <span className="ba-emoji">
+              <CloudOff size={36} strokeWidth={1.5} color="#8a8275" />
+            </span>
           </div>
           <div className="ba-mid">
             <span className="ba-arrow">→</span>
@@ -966,7 +1065,9 @@ function BetaProgram() {
               <br />
               알게 됨."
             </p>
-            <span className="ba-emoji">🌈</span>
+            <span className="ba-emoji">
+              <Rainbow size={36} strokeWidth={1.5} color="#fff" />
+            </span>
           </div>
         </div>
       </div>
@@ -978,7 +1079,7 @@ function Benefits() {
   return (
     <section className="sec sec--alt">
       <div className="sec-inner">
-        <span className="tag">Step 06 · What You Get</span>
+        <span className="tag">Step 05 · What You Get</span>
         <h2 className="sec-title">
           참여하면 <span className="accent">이런 걸</span> 얻어요
         </h2>
@@ -989,7 +1090,9 @@ function Benefits() {
         <div className="ben-grid">
           {BENEFITS.map((b, i) => (
             <div key={i} className="ben-card">
-              <div className="ben-icon">{b.icon}</div>
+              <div className="ben-icon">
+                <b.Icon size={28} strokeWidth={1.5} color="#7b6fa2" />
+              </div>
               <p className="ben-title">{b.title}</p>
               <p className="ben-desc">{b.desc}</p>
             </div>
@@ -1001,30 +1104,60 @@ function Benefits() {
 }
 
 function RealStories() {
+  const scrollRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  const [selected, setSelected] = useState(null);
+  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
+
+  const handleClick = (i) => {
+    if (selected === i) {
+      setSelected(null);
+      setPaused(false);
+    } else {
+      setSelected(i);
+      setPaused(true);
+    }
+  };
+
   return (
     <section id="stories" className="sec">
       <div className="sec-inner">
-        <span className="tag">Step 07 · Real Stories</span>
+        <span className="tag">Step 06 · Real Stories</span>
         <h2 className="sec-title">
           실제 참여자들의 <span className="accent">이야기</span>
         </h2>
-        <p className="sec-desc">옆으로 넘겨 더 많은 이야기를 만나보세요 →</p>
       </div>
-      <div className="story-scroll">
-        {TESTIMONIALS.map((s, i) => (
-          <article key={i} className="story-card">
-            <div className="story-head">
-              <span className="story-name">{s.demographic}</span>
-              <span
-                className="story-topic"
-                style={{ backgroundColor: s.topicColor }}
-              >
-                {s.topic}
-              </span>
-            </div>
-            <p className="story-quote">"{s.quote}"</p>
-          </article>
-        ))}
+      <div
+        className="story-carousel"
+        ref={scrollRef}
+        onMouseEnter={() => {
+          if (selected === null) setPaused(true);
+        }}
+        onMouseLeave={() => {
+          if (selected === null) setPaused(false);
+        }}
+      >
+        <div className={`story-track ${paused ? "story-track--paused" : ""}`}>
+          {doubled.map((s, i) => (
+            <article
+              key={i}
+              className={`story-card ${selected === i ? "story-card--active" : ""}`}
+              onClick={() => handleClick(i)}
+            >
+              <div className="story-head">
+                <span className="story-name">{s.demographic}</span>
+                <span
+                  className="story-topic"
+                  style={{ backgroundColor: s.topicColor }}
+                >
+                  {s.topic}
+                </span>
+              </div>
+              <p className="story-quote">"{s.quote}"</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -1049,6 +1182,18 @@ function ApplyForm() {
   };
   const submit = (e) => {
     e.preventDefault();
+    const entry = {
+      ...fd,
+      date: new Date().toLocaleString("ko-KR"),
+      timestamp: Date.now(),
+    };
+    const prev = JSON.parse(
+      localStorage.getItem("fillmore_applications") || "[]",
+    );
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+    const filtered = prev.filter((d) => Date.now() - d.timestamp < twoDays);
+    const updated = [entry, ...filtered].slice(0, 100);
+    localStorage.setItem("fillmore_applications", JSON.stringify(updated));
     alert(`신청 완료!\n이름: ${fd.name}\n연락처: ${fd.phone}`);
   };
   const capture = async () => {
@@ -1073,7 +1218,7 @@ function ApplyForm() {
             role="button"
             tabIndex={0}
           >
-            Step 08 · Apply
+            Step 07 · Apply
           </span>
           <h2 className="apply-title">
             사전체험단 신청하기
@@ -1231,11 +1376,65 @@ function ApplyForm() {
   );
 }
 
-function Footer() {
+function getRecords() {
+  const sevenDays = 7 * 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  return JSON.parse(
+    localStorage.getItem("fillmore_applications") || "[]",
+  ).filter((d) => now - d.timestamp < sevenDays);
+}
+
+function ClearAndAdmin({ showList, setShowList }) {
+  const records = showList ? getRecords() : [];
+
+  return (
+    <div className="clear-section">
+      <button
+        className="clear-btn"
+        onClick={() => {
+          sessionStorage.setItem("scrollTop", "true");
+          window.location.reload();
+        }}
+      >
+        처음으로 돌아가기
+      </button>
+      {showList && (
+        <div className="admin-list">
+          <h4 className="admin-title">최근 신청 내역 ({records.length}건)</h4>
+          {records.length === 0 ? (
+            <p className="admin-empty">저장된 신청 내역이 없습니다.</p>
+          ) : (
+            records.map((d, i) => (
+              <div key={i} className="admin-card">
+                <span className="admin-date">{d.date}</span>
+                <p>
+                  이름: {d.name} · 생년월일: {d.birthDate} · 성별: {d.gender}
+                </p>
+                <p>
+                  직업: {d.job} · 연락처: {d.phone}
+                </p>
+                <p>
+                  MBTI: {d.mbti} · 거주지: {d.location}
+                </p>
+                <p>고민: {d.concern}</p>
+                <p>참여시간: {d.available}</p>
+              </div>
+            ))
+          )}
+          <button className="clear-btn" onClick={() => setShowList(false)}>
+            닫기
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Footer({ onAdminTap }) {
   return (
     <footer id="contact" className="footer">
       <div className="footer-inner">
-        <p className="footer-copy">
+        <p className="footer-copy footer-copy--tap" onClick={onAdminTap}>
           © 2026 필모어 스튜디오 · Fillconomy. All rights reserved.
         </p>
         <div className="footer-links">
@@ -1332,6 +1531,27 @@ function Footer() {
 }
 
 export default function FeelComponents() {
+  const [tapCount, setTapCount] = useState(0);
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("scrollTop")) {
+      sessionStorage.removeItem("scrollTop");
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  const handleAdminTap = () => {
+    const next = tapCount + 1;
+    if (next >= 3) {
+      setTapCount(0);
+      setShowAdmin(!showAdmin);
+    } else {
+      setTapCount(next);
+      setTimeout(() => setTapCount(0), 2000);
+    }
+  };
+
   return (
     <div className="app">
       <Navigation />
@@ -1347,7 +1567,8 @@ export default function FeelComponents() {
       <RealStories />
 
       <ApplyForm />
-      <Footer />
+      <ClearAndAdmin showList={showAdmin} setShowList={setShowAdmin} />
+      <Footer onAdminTap={handleAdminTap} />
     </div>
   );
 }

@@ -35,6 +35,15 @@
   letter-spacing: -0.01em;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app button,
+.app a,
+.app [role="button"],
+.app [onclick] {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 /* ========== Header / Nav ========== */
@@ -1311,12 +1320,15 @@
   margin: 2rem 0 1.5rem;
   border-radius: 20px;
   overflow: hidden;
-  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f0ed;
 }
 
 .prod-poster-img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -1328,8 +1340,9 @@
 }
 
 .prod-tags {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
   gap: 0.6rem;
   margin-bottom: 3.5rem;
 }
@@ -1435,19 +1448,45 @@
 }
 
 /* ========== Problem ========== */
-.loop-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 2rem 0 1.2rem;
+.loop-circle {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 2rem auto 0;
 }
 
-.loop-node {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.loop-arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.loop-pos--0 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.loop-pos--1 {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.loop-pos--2 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.loop-pos--3 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
 .loop-btn {
@@ -1470,12 +1509,11 @@
 }
 
 .loop-btn:hover {
-  transform: scale(1.06);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .loop-btn--on {
-  transform: scale(1.12);
   border-color: #fff;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
@@ -1490,6 +1528,7 @@
 .loop-name {
   font-size: 0.88rem;
   font-weight: 700;
+  margin-top: -3px;
 }
 
 .loop-arrow {
@@ -1708,26 +1747,29 @@
 }
 
 /* ========== Stories ========== */
-.story-scroll {
-  display: flex;
-  gap: 1.1rem;
-  overflow-x: auto;
-  padding: 1rem 3.5rem 2rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: #c4a0d8 transparent;
+.story-carousel {
+  overflow: hidden;
+  padding: 1rem 0 2rem;
 }
 
-.story-scroll::-webkit-scrollbar {
-  height: 5px;
+.story-track {
+  display: flex;
+  gap: 1.1rem;
+  width: max-content;
+  animation: storySlide 22s linear infinite;
 }
-.story-scroll::-webkit-scrollbar-track {
-  background: transparent;
+
+.story-track--paused {
+  animation-play-state: paused;
 }
-.story-scroll::-webkit-scrollbar-thumb {
-  background: #c4a0d8;
-  border-radius: 3px;
+
+@keyframes storySlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .story-card {
@@ -1737,7 +1779,8 @@
   padding: 1.4rem;
   background: #fff;
   border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -1747,6 +1790,20 @@
 .story-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.story-card--active {
+  border-color: rgb(126, 200, 160);
+  box-shadow: 0 8px 20px rgba(126, 200, 160, 0.15);
+  transform: translateY(-3px);
+}
+
+.story-card {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
 }
 
 .story-head {
@@ -2216,6 +2273,75 @@
   background: rgba(250, 199, 58, 0.08);
 }
 
+/* ========== Clear ========== */
+.clear-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #FFF8F3;
+}
+
+.clear-btn {
+  padding: 0.7rem 2rem;
+  background: none;
+  color: #999;
+  border: 1.5px solid #ddd;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  color: #555;
+  border-color: #bbb;
+}
+
+.footer-copy--tap {
+  cursor: pointer;
+}
+
+.admin-list {
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+}
+
+.admin-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.admin-empty {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.admin-card {
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+.admin-card p {
+  margin: 0;
+}
+
+.admin-date {
+  display: block;
+  font-size: 0.72rem;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+}
+
 /* ========== Footer ========== */
 .footer {
   background: #f5f5f5;
@@ -2446,17 +2572,26 @@
   .prod-poster {
     border-radius: 14px;
   }
+  .prod-tags {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+  .prod-tag {
+    text-align: center;
+  }
   .phase-grid {
     grid-template-columns: 1fr;
   }
 
-  .loop-btn {
-    width: 100px;
+  .loop-circle {
+    width: 320px;
+    height: 320px;
   }
 
-  .story-scroll {
-    padding: 1rem 1.5rem 1.5rem;
+  .loop-btn {
+    width: 90px;
   }
+
   .story-card {
     min-width: 260px;
     width: 260px;
@@ -2684,17 +2819,16 @@
     font-size: 1.3rem;
   }
 
-  .loop-btn {
-    width: 85px;
+  .loop-circle {
+    width: 280px;
+    height: 280px;
   }
-  .loop-icon {
-    font-size: 1.5rem;
+  .loop-btn {
+    width: 78px;
+    aspect-ratio: 1;
   }
   .loop-name {
-    font-size: 0.78rem;
-  }
-  .loop-arrow {
-    font-size: 1rem;
+    font-size: 0.72rem;
   }
 
   .prob-row {
@@ -2837,9 +2971,6 @@
   }
 
   /* Story */
-  .story-scroll {
-    padding: 1rem 1rem 1.5rem;
-  }
   .story-card {
     min-width: 240px;
     width: 240px;

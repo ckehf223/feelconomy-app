@@ -1191,7 +1191,7 @@ function ApplyForm() {
       localStorage.getItem("fillmore_applications") || "[]",
     );
     const sevenDays = 7 * 24 * 60 * 60 * 1000;
-    const filtered = prev.filter((d) => Date.now() - d.timestamp < twoDays);
+    const filtered = prev.filter((d) => Date.now() - d.timestamp < sevenDays);
     const updated = [entry, ...filtered].slice(0, 100);
     localStorage.setItem("fillmore_applications", JSON.stringify(updated));
     alert(`신청 완료!\n이름: ${fd.name}\n연락처: ${fd.phone}`);

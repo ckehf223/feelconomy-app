@@ -1,35 +1,30 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import html2canvas from "html2canvas";
-import { Sun, Cloud, Umbrella, Zap } from "lucide-react";
 import "./FeelComponents.css";
 
 const EMOTIONS = [
   {
-    Icon: Sun,
+    iconUrl: "https://img.icons8.com/color/96/sun--v1.png",
     label: "햇살",
     color: "#FFF3D6",
-    iconColor: "#E8A030",
     message: "오늘은 맑은 하루네요! 이 에너지를 잘 활용해보세요.",
   },
   {
-    Icon: Cloud,
+    iconUrl: "https://img.icons8.com/color/96/cloud--v1.png",
     label: "구름",
     color: "#EDE5D8",
-    iconColor: "#999",
     message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.",
   },
   {
-    Icon: Umbrella,
+    iconUrl: "https://img.icons8.com/color/96/rainy-weather--v1.png",
     label: "비",
     color: "#D4DEE8",
-    iconColor: "#6B8DB5",
     message: "비 오는 날엔 잠시 쉬어가도 괜찮아요. 당신의 감정은 소중해요.",
   },
   {
-    Icon: Zap,
+    iconUrl: "https://img.icons8.com/color/96/lightning-bolt--v1.png",
     label: "번개",
     color: "#E8D4E8",
-    iconColor: "#9B7ED8",
     message: "감정이 격하게 요동치는 날이네요. 깊은 숨 한번 쉬어볼까요?",
   },
 ];
@@ -117,85 +112,33 @@ const TESTIMONIALS = [
   },
 ];
 
-const BENEFITS = [
-  {
-    icon: "🧠",
-    title: "감정 구조 리포트",
-    desc: "나의 감정이 어떤 구조로 작동하는지 시각화된 분석 결과를 받아요.",
-  },
-  {
-    icon: "🔁",
-    title: "반복 패턴 진단",
-    desc: "인간관계·연애·스트레스에서 반복되는 나만의 패턴을 정확히 짚어드려요.",
-  },
-  {
-    icon: "📋",
-    title: "맞춤 회복 루틴표",
-    desc: "내 성격과 환경에 맞는 구체적인 회복 전략을 문서로 제공해요.",
-  },
-  {
-    icon: "🗣️",
-    title: "1:1 전문 코칭 2회",
-    desc: "전문 코치와 함께 감정 패턴을 분석하고 방향을 설계하는 깊은 대화.",
-  },
-  {
-    icon: "📊",
-    title: "변화 추적 시트",
-    desc: "프로그램 전후 감정 변화를 직접 비교할 수 있는 셀프 체크 도구.",
-  },
-  {
-    icon: "💬",
-    title: "사후 피드백 1회",
-    desc: "프로그램 종료 2주 후, 변화가 유지되고 있는지 점검하는 팔로업 세션.",
-  },
-];
-
-const TRUST_POINTS = [
-  {
-    title: "일회성 상담이 아닌 구조화된 여정",
-    desc: "단발성 대화가 아니라, 단계별로 설계된 프로그램을 따라가며 스스로 변화를 체감합니다.",
-  },
-  {
-    title: "감정이 아닌 '패턴'에 집중",
-    desc: "지금의 감정보다 반복되는 구조를 파악해, 같은 자리에서 맴도는 루프를 끊습니다.",
-  },
-  {
-    title: "나만의 회복 매뉴얼을 설계",
-    desc: "일반적인 조언이 아니라, 내 성격과 환경에 맞는 구체적인 회복 루틴을 함께 만듭니다.",
-  },
-  {
-    title: "프로그램 이후에도 스스로 작동",
-    desc: "코칭이 끝나도 혼자서 감정을 읽고 대응할 수 있는 자기 관리 역량을 남깁니다.",
-  },
-];
-
 const ABOUT_CARDS = [
   {
     label: "SEONGSU, 2026",
     title: "성수 팝업",
     desc: "감정을 직접 만지고 경험하는 오프라인 공간",
-    icon: "🏠",
+    iconUrl: "https://img.icons8.com/color/96/shop--v1.png",
     color: "#F5B8C4",
   },
   {
     label: "BRANDING STUDIO",
     title: "브랜딩 컨설팅",
     desc: "브랜드의 빈 부분을 채우는 전략 설계",
-    icon: "✦",
+    iconUrl: "https://img.icons8.com/color/96/design--v1.png",
     color: "#D6D48C",
   },
   {
     label: "EMOTION DATA",
     title: "감정 데이터",
     desc: "실제 참여자 기반의 감정 패턴 분석",
-    icon: "📊",
+    iconUrl: "https://img.icons8.com/color/96/combo-chart--v1.png",
     color: "#8CBEE0",
   },
   {
     label: "LONG-TERM GOAL",
     title: "Wee클래스 보급",
     desc: "학교 현장으로 확장하는 정서지원 모델",
-    icon: "🎓",
+    iconUrl: "https://img.icons8.com/color/96/graduation-cap--v1.png",
     color: "#E8A88C",
   },
 ];
@@ -203,25 +146,25 @@ const ABOUT_CARDS = [
 const LOOP_ITEMS = [
   {
     label: "불안",
-    icon: "😰",
+    iconUrl: "https://img.icons8.com/color/96/error--v1.png",
     color: "#E8A88C",
     detail: "무언가 잘못될 것 같은 막연한 두려움이 반복됩니다.",
   },
   {
     label: "회피",
-    icon: "🙈",
+    iconUrl: "https://img.icons8.com/color/96/hide--v1.png",
     color: "#D6D48C",
     detail: "불편한 감정을 마주하지 않고 자꾸 뒤로 미루게 됩니다.",
   },
   {
     label: "후회",
-    icon: "😔",
+    iconUrl: "https://img.icons8.com/color/96/disappointed.png",
     color: "#8CBEE0",
     detail: "왜 그때 그렇게 했을까, 같은 생각이 머릿속을 맴돕니다.",
   },
   {
     label: "스트레스",
-    icon: "🤯",
+    iconUrl: "https://img.icons8.com/color/96/fire-element--v1.png",
     color: "#F5B8C4",
     detail: "쌓이고 쌓여 결국 몸과 마음이 함께 무너지는 순간이 옵니다.",
   },
@@ -624,7 +567,14 @@ function AboutStudio() {
             >
               <div className="about-card-head">
                 <span className="about-card-tag">{card.label}</span>
-                <span className="about-card-icon">{card.icon}</span>
+                <span className="about-card-icon">
+                  <img
+                    src={card.iconUrl}
+                    alt={card.title}
+                    width={24}
+                    height={24}
+                  />
+                </span>
               </div>
               <div className="about-card-foot">
                 <span className="about-card-title">{card.title}</span>
@@ -738,7 +688,7 @@ function EmotionCheck() {
               onClick={() => handleSelect(em)}
             >
               <span className="emo-icon">
-                <em.Icon size={48} color={em.iconColor} strokeWidth={1.5} />
+                <img src={em.iconUrl} alt={em.label} width={48} height={48} />
               </span>
               <span className="emo-name">{em.label}</span>
             </button>
@@ -749,7 +699,7 @@ function EmotionCheck() {
           {cur && (
             <>
               <div className="emo-result-icon" key={animKey}>
-                <cur.Icon size={42} color={cur.iconColor} strokeWidth={1.5} />
+                <img src={cur.iconUrl} alt={cur.label} width={42} height={42} />
               </div>
               <p className="emo-result-msg">{cur.message}</p>
             </>
@@ -918,7 +868,9 @@ function Problem() {
               style={{ backgroundColor: it.color }}
               onClick={() => setActive((c) => (c === i ? null : i))}
             >
-              <span className="loop-icon">{it.icon}</span>
+              <span className="loop-icon">
+                <img src={it.iconUrl} alt={it.label} width={32} height={32} />
+              </span>
               <span className="loop-name">{it.label}</span>
             </button>
           ))}
@@ -1370,10 +1322,14 @@ function ClearAndAdmin({ showList, setShowList }) {
   const [guide, setGuide] = useState(
     () => localStorage.getItem("fillmore_guide") || "",
   );
+  const [savedGuide, setSavedGuide] = useState(
+    () => localStorage.getItem("fillmore_guide") || "",
+  );
   const records = showList ? getRecords() : [];
 
   const saveGuide = () => {
     localStorage.setItem("fillmore_guide", guide);
+    setSavedGuide(guide);
     alert("인도자가 저장되었습니다.");
   };
 
@@ -1410,7 +1366,7 @@ function ClearAndAdmin({ showList, setShowList }) {
                 placeholder="이름 입력"
               />
               <button className="admin-guide-save" onClick={saveGuide}>
-                저장
+                변경
               </button>
             </div>
           </div>
@@ -1431,9 +1387,8 @@ function ClearAndAdmin({ showList, setShowList }) {
                 </p>
                 <p>고민: {d.concern}</p>
                 <p>참여시간: {d.available}</p>
+                <p>방문경로: {d.referral || "-"}</p>
                 {(() => {
-                  const savedGuide =
-                    localStorage.getItem("fillmore_guide") || "";
                   const summary = `${d.timestamp ? `${new Date(d.timestamp).getMonth() + 1}/${new Date(d.timestamp).getDate()}` : "-"}-신규-${d.name}-${d.phone}-${d.gender === "남성" ? "남" : d.gender === "여성" ? "여" : d.gender}-${d.birthDate}-${d.location}-필코노미-${savedGuide}-비오픈`;
                   return (
                     <div className="admin-summary-row">

@@ -54,7 +54,12 @@ const EMOTIONS = [
   },
 ];
 
-const PRODUCTS = ["왁뿌볼 / 슬라임", "AI 상담", "캔들 / 디퓨저", "음식"];
+const PRODUCTS = [
+  "왁뿌볼 / 슬라임",
+  "AI 상담",
+  "캔들 / 디퓨저",
+  "음식 / 맛집투어",
+];
 
 const PHASES = [
   {
@@ -983,23 +988,7 @@ function Solution() {
           ))}
         </div>
 
-        <div className="disc-box">
-          <h3 className="disc-title">
-            이 프로그램을 통해 <span className="accent">발견</span>하게 됩니다
-          </h3>
-          <div className="disc-list">
-            {DISCOVERIES.map((d, i) => (
-              <div key={i} className="disc-row">
-                <span className="disc-num">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="disc-text">{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <h3 className="trust-heading">
+        {/* <h3 className="trust-heading">
           다른 상담과 <span className="accent">무엇이 다른가요?</span>
         </h3>
         <div className="trust-grid">
@@ -1012,7 +1001,7 @@ function Solution() {
               <p className="trust-desc">{t.desc}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -1042,7 +1031,23 @@ function BetaProgram() {
           ))}
         </div>
 
-        <div className="ba-row">
+        <div className="disc-box">
+          <h3 className="disc-title">
+            이 프로그램을 통해 <span className="accent">발견</span>하게 됩니다
+          </h3>
+          <div className="disc-list">
+            {DISCOVERIES.map((d, i) => (
+              <div key={i} className="disc-row">
+                <span className="disc-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="disc-text">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* <div className="ba-row">
           <div className="ba ba--before">
             <span className="ba-tag">BEFORE</span>
             <p className="ba-quote">
@@ -1069,7 +1074,7 @@ function BetaProgram() {
               <Rainbow size={36} strokeWidth={1.5} color="#fff" />
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -1419,7 +1424,7 @@ function getRecords() {
   ).filter((d) => now - d.timestamp < sevenDays);
 }
 
-function ClearAndAdmin({ showList, setShowList }) {
+function ClearAndAdmin({ showList, setShdowList }) {
   const [guide, setGuide] = useState(
     () => localStorage.getItem("fillmore_guide") || "",
   );
@@ -1658,13 +1663,13 @@ export default function FeelComponents() {
       <Navigation />
       <Hero />
       <JourneyStrip />
-      <EmotionCheck />
       <AboutStudio />
+      <EmotionCheck />
       <Feelconomy />
       <Problem />
       <Solution />
       <BetaProgram />
-      <Benefits />
+      {/* <Benefits /> */}
       <RealStories />
 
       <ApplyForm />

@@ -1,26 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import html2canvas from "html2canvas";
-import {
-  Sun,
-  Cloud,
-  CloudRain,
-  Zap,
-  Brain,
-  Repeat2,
-  ClipboardList,
-  Mic,
-  BarChart3,
-  MessageSquare,
-  Home,
-  Sparkles,
-  GraduationCap,
-  AlertTriangle,
-  EyeOff,
-  HeartCrack,
-  Flame,
-  CloudOff,
-  Rainbow,
-} from "lucide-react";
+import { Sun, Cloud, Umbrella, Zap } from "lucide-react";
 import "./FeelComponents.css";
 
 const EMOTIONS = [
@@ -39,7 +19,7 @@ const EMOTIONS = [
     message: "조금 흐린 기분이군요. 괜찮아요, 구름 뒤엔 항상 햇살이 있어요.",
   },
   {
-    Icon: CloudRain,
+    Icon: Umbrella,
     label: "비",
     color: "#D4DEE8",
     iconColor: "#6B8DB5",
@@ -139,32 +119,32 @@ const TESTIMONIALS = [
 
 const BENEFITS = [
   {
-    Icon: Brain,
+    icon: "🧠",
     title: "감정 구조 리포트",
     desc: "나의 감정이 어떤 구조로 작동하는지 시각화된 분석 결과를 받아요.",
   },
   {
-    Icon: Repeat2,
+    icon: "🔁",
     title: "반복 패턴 진단",
     desc: "인간관계·연애·스트레스에서 반복되는 나만의 패턴을 정확히 짚어드려요.",
   },
   {
-    Icon: ClipboardList,
+    icon: "📋",
     title: "맞춤 회복 루틴표",
     desc: "내 성격과 환경에 맞는 구체적인 회복 전략을 문서로 제공해요.",
   },
   {
-    Icon: Mic,
+    icon: "🗣️",
     title: "1:1 전문 코칭 2회",
     desc: "전문 코치와 함께 감정 패턴을 분석하고 방향을 설계하는 깊은 대화.",
   },
   {
-    Icon: BarChart3,
+    icon: "📊",
     title: "변화 추적 시트",
     desc: "프로그램 전후 감정 변화를 직접 비교할 수 있는 셀프 체크 도구.",
   },
   {
-    Icon: MessageSquare,
+    icon: "💬",
     title: "사후 피드백 1회",
     desc: "프로그램 종료 2주 후, 변화가 유지되고 있는지 점검하는 팔로업 세션.",
   },
@@ -194,28 +174,28 @@ const ABOUT_CARDS = [
     label: "SEONGSU, 2026",
     title: "성수 팝업",
     desc: "감정을 직접 만지고 경험하는 오프라인 공간",
-    Icon: Home,
+    icon: "🏠",
     color: "#F5B8C4",
   },
   {
     label: "BRANDING STUDIO",
     title: "브랜딩 컨설팅",
     desc: "브랜드의 빈 부분을 채우는 전략 설계",
-    Icon: Sparkles,
+    icon: "✦",
     color: "#D6D48C",
   },
   {
     label: "EMOTION DATA",
     title: "감정 데이터",
     desc: "실제 참여자 기반의 감정 패턴 분석",
-    Icon: BarChart3,
+    icon: "📊",
     color: "#8CBEE0",
   },
   {
     label: "LONG-TERM GOAL",
     title: "Wee클래스 보급",
     desc: "학교 현장으로 확장하는 정서지원 모델",
-    Icon: GraduationCap,
+    icon: "🎓",
     color: "#E8A88C",
   },
 ];
@@ -223,25 +203,25 @@ const ABOUT_CARDS = [
 const LOOP_ITEMS = [
   {
     label: "불안",
-    Icon: AlertTriangle,
+    icon: "😰",
     color: "#E8A88C",
     detail: "무언가 잘못될 것 같은 막연한 두려움이 반복됩니다.",
   },
   {
     label: "회피",
-    Icon: EyeOff,
+    icon: "🙈",
     color: "#D6D48C",
     detail: "불편한 감정을 마주하지 않고 자꾸 뒤로 미루게 됩니다.",
   },
   {
     label: "후회",
-    Icon: HeartCrack,
+    icon: "😔",
     color: "#8CBEE0",
     detail: "왜 그때 그렇게 했을까, 같은 생각이 머릿속을 맴돕니다.",
   },
   {
     label: "스트레스",
-    Icon: Flame,
+    icon: "🤯",
     color: "#F5B8C4",
     detail: "쌓이고 쌓여 결국 몸과 마음이 함께 무너지는 순간이 옵니다.",
   },
@@ -644,9 +624,7 @@ function AboutStudio() {
             >
               <div className="about-card-head">
                 <span className="about-card-tag">{card.label}</span>
-                <span className="about-card-icon">
-                  <card.Icon size={22} strokeWidth={1.5} />
-                </span>
+                <span className="about-card-icon">{card.icon}</span>
               </div>
               <div className="about-card-foot">
                 <span className="about-card-title">{card.title}</span>
@@ -841,6 +819,23 @@ function Feelconomy() {
   );
 }
 
+function EventBanner() {
+  return (
+    <section className="event-banner">
+      <div className="event-banner-inner">
+        <span className="event-banner-badge">🎉FEELCONOMY EVENT🎉</span>
+        <div className="event-banner-frame">
+          <img
+            src="/assets/fillconomy-event-banner.jpg"
+            alt="Fillconomy Event - 당신의 빈 부분을 채우는 가장 좋은 투자"
+            className="event-banner-img"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Problem() {
   const [active, setActive] = useState(null);
 
@@ -923,9 +918,7 @@ function Problem() {
               style={{ backgroundColor: it.color }}
               onClick={() => setActive((c) => (c === i ? null : i))}
             >
-              <span className="loop-icon">
-                <it.Icon size={28} strokeWidth={1.5} color="#333" />
-              </span>
+              <span className="loop-icon">{it.icon}</span>
               <span className="loop-name">{it.label}</span>
             </button>
           ))}
@@ -987,21 +980,6 @@ function Solution() {
             </div>
           ))}
         </div>
-
-        {/* <h3 className="trust-heading">
-          다른 상담과 <span className="accent">무엇이 다른가요?</span>
-        </h3>
-        <div className="trust-grid">
-          {TRUST_POINTS.map((t, i) => (
-            <div key={i} className="trust-card">
-              <span className="trust-num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h4 className="trust-title">{t.title}</h4>
-              <p className="trust-desc">{t.desc}</p>
-            </div>
-          ))}
-        </div> */}
       </div>
     </section>
   );
@@ -1046,63 +1024,6 @@ function BetaProgram() {
             ))}
           </div>
         </div>
-
-        {/* <div className="ba-row">
-          <div className="ba ba--before">
-            <span className="ba-tag">BEFORE</span>
-            <p className="ba-quote">
-              "왜 힘든지
-              <br />
-              모르겠음."
-            </p>
-            <span className="ba-emoji">
-              <CloudOff size={36} strokeWidth={1.5} color="#8a8275" />
-            </span>
-          </div>
-          <div className="ba-mid">
-            <span className="ba-arrow">→</span>
-          </div>
-          <div className="ba ba--after">
-            <span className="ba-tag">AFTER</span>
-            <p className="ba-quote">
-              "내가 왜<br />
-              반복되는지
-              <br />
-              알게 됨."
-            </p>
-            <span className="ba-emoji">
-              <Rainbow size={36} strokeWidth={1.5} color="#fff" />
-            </span>
-          </div>
-        </div> */}
-      </div>
-    </section>
-  );
-}
-
-function Benefits() {
-  return (
-    <section className="sec sec--alt">
-      <div className="sec-inner">
-        <span className="tag">Step 05 · What You Get</span>
-        <h2 className="sec-title">
-          참여하면 <span className="accent">이런 걸</span> 얻어요
-        </h2>
-        <p className="sec-desc">
-          단순한 상담이 아닙니다. 프로그램을 마치면 눈에 보이는 결과물과 변화를
-          가져갑니다.
-        </p>
-        <div className="ben-grid">
-          {BENEFITS.map((b, i) => (
-            <div key={i} className="ben-card">
-              <div className="ben-icon">
-                <b.Icon size={28} strokeWidth={1.5} color="#7b6fa2" />
-              </div>
-              <p className="ben-title">{b.title}</p>
-              <p className="ben-desc">{b.desc}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -1128,7 +1049,7 @@ function RealStories() {
   return (
     <section id="stories" className="sec">
       <div className="sec-inner">
-        <span className="tag">Step 06 · Real Stories</span>
+        <span className="tag">Step 05 · Real Stories</span>
         <h2 className="sec-title">
           실제 참여자들의 <span className="accent">이야기</span>
         </h2>
@@ -1178,6 +1099,7 @@ function ApplyForm() {
     phone: "",
     mbti: "",
     location: "",
+    referral: "",
     concern: "",
     available: "",
   });
@@ -1227,7 +1149,7 @@ function ApplyForm() {
             role="button"
             tabIndex={0}
           >
-            Step 07 · Apply
+            Step 06 · Apply
           </span>
           <h2 className="apply-title">
             사전체험단 신청하기
@@ -1351,6 +1273,26 @@ function ApplyForm() {
               </div>
             </div>
             <div className="af-group">
+              <label className="af-label">방문 경로</label>
+              <div className="af-checkbox-group">
+                {["직원 추천", "학교/회사", "SNS", "기타"].map((opt) => (
+                  <label key={opt} className="af-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={fd.referral === opt}
+                      onChange={() =>
+                        setFd((p) => ({
+                          ...p,
+                          referral: p.referral === opt ? "" : opt,
+                        }))
+                      }
+                    />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="af-group">
               <label className="af-label">
                 참여 가능 시간 (평일, 20시까지)
               </label>
@@ -1424,7 +1366,7 @@ function getRecords() {
   ).filter((d) => now - d.timestamp < sevenDays);
 }
 
-function ClearAndAdmin({ showList, setShdowList }) {
+function ClearAndAdmin({ showList, setShowList }) {
   const [guide, setGuide] = useState(
     () => localStorage.getItem("fillmore_guide") || "",
   );
@@ -1667,11 +1609,10 @@ export default function FeelComponents() {
       <EmotionCheck />
       <Feelconomy />
       <Problem />
+      <EventBanner />
       <Solution />
       <BetaProgram />
-      {/* <Benefits /> */}
       <RealStories />
-
       <ApplyForm />
       <ClearAndAdmin showList={showAdmin} setShowList={setShowAdmin} />
       <Footer onAdminTap={handleAdminTap} />

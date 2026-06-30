@@ -14,6 +14,53 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap");
 
+/* ========== Event Banner ========== */
+.event-banner {
+  width: 100%;
+  background: linear-gradient(135deg, #fff8f3 0%, #fdeef0 50%, #f5f0fb 100%);
+  padding: 3.5rem 3.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.event-banner-inner {
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-banner-badge {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0.45rem 1.2rem;
+  border-radius: 100px;
+  margin-bottom: 1.2rem;
+}
+
+.event-banner-frame {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.event-banner-frame:hover {
+  transform: translateY(-4px);
+}
+
+.event-banner-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 /* ========== Reset & Base ========== */
 :root {
   color-scheme: light only;
@@ -1695,7 +1742,7 @@
   padding: 3rem 2.5rem;
   background: #fff;
   border-radius: 22px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   text-align: center;
 }
 
@@ -1840,14 +1887,14 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.9rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .beta-card {
   padding: 1.4rem;
   background: #fff;
   border-radius: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -2185,6 +2232,56 @@
   background-position: right 0.8rem center;
   padding-right: 2rem;
   cursor: pointer;
+}
+
+.af-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.af-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.af-checkbox input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.af-checkbox input:checked {
+  background: rgb(126, 200, 160);
+  border-color: rgb(126, 200, 160);
+}
+
+.af-checkbox input:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.af-checkbox:has(input:checked) span {
+  color: #1a1a1a;
+  font-weight: 600;
 }
 
 .af-group {
@@ -2705,6 +2802,18 @@
 }
 
 @media (max-width: 768px) {
+  /* Event Banner */
+  .event-banner {
+    padding: 2.5rem 1.5rem;
+  }
+  .event-banner-frame {
+    border-radius: 16px;
+  }
+  .event-banner-badge {
+    font-size: 0.68rem;
+    padding: 0.4rem 1rem;
+  }
+
   /* Nav - hide desktop nav, show hamburger */
   .nav--desktop {
     display: none;

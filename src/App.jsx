@@ -24,8 +24,8 @@ function App() {
   const handleNavigate = useCallback(
     (target) => {
       const isHome = location.pathname === "/";
-      if (target === "test") {
-        navigate("/test");
+      if (target === "feeltype") {
+        navigate("/feeltype");
         window.scrollTo(0, 0);
         return;
       }
@@ -71,7 +71,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home showAdmin={showAdmin} setShowAdmin={setShowAdmin} />} />
         <Route
-          path="/test"
+          path="/feeltype"
           element={
             <FillTypeTest
               onApply={() => handleNavigate("apply")}

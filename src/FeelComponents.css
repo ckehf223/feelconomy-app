@@ -67,6 +67,9 @@
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
   font-family:
     "Pretendard",
     -apple-system,
@@ -2704,6 +2707,7 @@
 
 /* ========== Footer ========== */
 .footer {
+  margin-top: auto;
   background: #f5f5f5;
   padding: 2.8rem 3.5rem;
   text-align: center;
@@ -3783,29 +3787,68 @@
 
 @media (max-width: 768px) {
   .fit-page {
-    padding: calc(60px + 2.5rem) 1.5rem 3rem;
+    min-height: 0;
+    align-items: flex-start;
+    padding: calc(60px + 1.2rem) 1rem 1.5rem;
+  }
+  .fit-page-inner {
+    max-width: 100%;
+  }
+  .fit-viewport {
+    border-radius: 20px;
   }
   .fit-slide {
-    min-height: 520px;
-    padding: 2rem 1.2rem;
+    min-height: 0;
+    padding: 2.2rem 1.3rem;
+    gap: 1rem;
+  }
+  .fit-intro-desc {
+    font-size: 1rem;
+  }
+  .fit-start-btn {
+    padding: 0.95rem 2.2rem;
+    font-size: 0.95rem;
   }
   .fit-options {
     max-width: 100%;
+    gap: 0.75rem;
+  }
+  .fit-nav-row {
+    max-width: 100%;
+  }
+  .fit-result-desc {
+    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 480px) {
+  .fit-page {
+    padding: calc(60px + 1rem) 0.75rem 1.25rem;
+  }
+  .fit-slide {
+    padding: 1.8rem 1rem;
+  }
+  .fit-intro-desc {
+    max-width: 100%;
+  }
   .fit-option {
-    padding: 0.9rem 1.15rem;
-    gap: 0.7rem;
-    font-size: 0.9rem;
+    padding: 0.9rem 1.1rem;
+    gap: 0.65rem;
+    font-size: 0.88rem;
+    border-radius: 14px;
   }
   .fit-option-icon {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+  .fit-nav-row {
+    gap: 0.6rem;
   }
   .fit-nav-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.85rem;
+    flex: 1;
+    justify-content: center;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
   }
   .fit-result-recommend {
     max-width: 100%;

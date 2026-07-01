@@ -44,13 +44,13 @@ export default function Navigation({ onNavigate }) {
                 {item.label}
               </button>
             ))}
-            <button
+            {/* <button
               type="button"
               className="nav-link nav-link--btn"
-              onClick={() => onNavigate("test")}
+              onClick={() => onNavigate("feeltype")}
             >
-              Fill Type
-            </button>
+              Feel Type
+            </button> */}
             <button
               type="button"
               className="nav-link nav-link--btn"
@@ -99,13 +99,13 @@ export default function Navigation({ onNavigate }) {
               {item.label}
             </button>
           ))}
-          <button
+          {/* <button
             type="button"
             className="mobile-menu-link mobile-menu-link--btn"
-            onClick={() => go("test")}
+            onClick={() => go("feeltype")}
           >
-            Fill Type
-          </button>
+            Feel Type
+          </button> */}
           <button
             type="button"
             className="mobile-menu-link mobile-menu-link--btn"
